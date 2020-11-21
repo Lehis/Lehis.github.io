@@ -1,0 +1,712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+
+<head>
+    <title>Learning Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous" type=""></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+    <link href="https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre|Roboto" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/toc.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/spoiler.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="bump">
+    <header class="site-header darken">
+        <div class="wrap">
+            <hgroup>
+                <h1> Alexey Tochin </h1>
+            </hgroup>
+            <a class="nav menu" href="#"><span class='icons'>☰</span></a>
+            <nav role="navigation">
+                <ul>
+                    <li><a href="../../home.html"> Home </a></li>
+                    <li><a href="../../machine_learning.html"> Machine Learning </a></li>
+                    <li><a href="../../other_topics.html"> Other topics </a></li>
+                    <li><a href="../../about.html"> About </a></li>
+                    <li><a href="../../references.html"> References </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</div>
+
+<nav class="toc">
+    <ul>
+        <li> <a href="#Section-Notation"> Notation </a> </li>
+        <li> <a href="#Section-Learning-rate-normalization"> Learning rate normalization </a> </li>
+        <li> <a href="#Section-convergence-stability"> Convergence stability </a> </li>
+        <li> <a href="#Section-Gradient-decent-with-momentum"> Gradient decent with momentum </a> </li>
+        <li> <a href="#Section-Adam-gradient-decent-case"> Adam gradient decent case </a> </li>
+        <li> <a href="#Section-Gradient-accumulation-technique"> Gradient accumulation technique </a> </li>
+        <li> <a href="#Section-Conclusion"> Conclusion </a> </li>
+    </ul>
+    <svg class="toc-marker" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+        <path
+            stroke="#4c71b2"
+            stroke-width="3"
+            fill="transparent"
+            stroke-dasharray="0, 0, 0, 1000"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            transform="translate(-0.5, -0.5)"
+        />
+    </svg>
+</nav>
+
+<section class="article">
+    <article class="wrap post">
+            <header class="post-header">
+                <hgroup>
+                    <h1>Batch size vs Momentum</h1>
+                </hgroup>
+            </header>
+            <p>
+                Suppose we found an optimal learning rate and other hyperparameters for a gradient decent method and for a certain model.
+                A typical next step is to train the model on a more power hardware with more GPU units and GPU RAM that supports bigger batch size. 
+                How should we scale up the gradient decent hyperparameters and do not knock down the settings?
+                We address this question and 
+                some familiar ones in this article. 
+                The main thesis of this paper:
+                <em>batch size change is approximately equivalent to a certain shift of learning rate and momentum</em>.
+            </p>
+            <section id=Section-Notation>
+                <h2> Notation </h2>
+                <p>
+                    Let
+                    \( \boldsymbol\theta \in \mathbb{R}^D \)
+                    be a trainable weight that is a vector in 
+                    a
+                    \( D \)-dimensional
+                    space of the model trainable weights.
+                    We denote by
+                    \( \{\boldsymbol\theta_n\}_{n = 0,1,2,3\dotso} \)
+                    a sequence of the weight updates during the training process.
+                </p>
+                <p>
+                    Let also
+                    \( L(x, y; \boldsymbol\theta) \)
+                    be a loss function for a supervised model for the weight
+                    \( \boldsymbol\theta \),
+                    and a single sample with  
+                    feature
+                    \( x \),
+                    and label
+                    \( y \).
+                    Let
+                </p>
+                \[\begin{aligned}
+                	\mathbf{g}_i(\boldsymbol\theta) := \frac{\partial}{\partial \mathbf{\boldsymbol\theta}} L(x_i, y_i; \boldsymbol\theta)
+                \end{aligned}\]
+                <p>
+                    be the loss gradient at the point
+                    \( \boldsymbol\theta \)
+                    for a sample
+                    \( (x_i,y_i) \)
+                    with an ordering number
+                    \( i=0,1,2,\dotso \).
+                    The samples
+                    \( \{(x_i,y_i)\}_{i=0,1,2,\dotso} \)
+                    are combined in batches. We restrict ourself with the fixed batch size situation
+                    \( b=1,2,3,\dotso \).
+                    We define an integer valued function
+                </p>
+                \[\begin{aligned}
+                	t:\quad \{0,1,2,\dotso\} \quad \rightarrow \quad \{0,1,2,\dotso\}
+                \end{aligned}\]
+                <p>
+                    that maps the ordering number of each sample to the ordering number of the batch it belongs to.
+                    For example, for
+                    \( b=3 \)
+                    we have
+                </p>
+                \[\begin{aligned}
+                	t_0 = 0,~t_1 = 0,~t_2 = 0,~t_3 = 1,~t_4 = 1,~t_5 = 1,~t_6 = 2,~t_7 = 2,~t_8 = 2,~\dotso.
+                \end{aligned}\]
+            </section>
+            <section id=Section-Learning-rate-normalization>
+                <h2> Learning rate normalization </h2>
+                <p>
+                    We start from the simplest version of the stochastic gradient decent without momentum
+                    parameterized by the learning rate
+                    \( \lambda^{\text{cl}} > 0 \).
+                    The weight update rule is
+                </p>
+                <div id="Fomula-classic-SGD-without-momentum">
+                    <p class="formula_num"> (2.1) </p>
+                    \[\begin{aligned}
+                    	\boldsymbol\theta_{n-1}~ \rightarrow~ \boldsymbol\theta_n := 
+                    	\boldsymbol\theta_{n-1} - \lambda^{\text{cl}} \, b^{-1} \sum_{i:~ t(i) = n} \mathbf{g}_i(w_n)
+                    \end{aligned}\]
+                </div>
+                <p>
+                    The upper index
+                    <q>\( ~^{\text{cl}} \)</q>
+                    is for
+                    <q>classically normalized</q>
+                    parameters that we are going to renormalize.
+                </p>
+                <p>
+                    Suppose the batch size
+                    \( b \)
+                    has been changed.
+                    Our purpose is to scale up
+                    \( \lambda^{\text{cl}} \)
+                    such that the shift of
+                    <q>weight history</q>
+                    \( \{\boldsymbol\theta_n\}_{n = 0,1,2,3,\dotso} \)
+                    is minimized. More precisely, 
+                    after the batch size change
+                    \( b \rightarrow \tilde b \),
+                    new weights
+                    \( \tilde{\boldsymbol\theta}_{\tilde t(i)} \)
+                    must be closed to the original ones
+                    \( \boldsymbol\theta_{t(i)} \)
+                    for each
+                    \( i=0,1,2,\dotso \),
+                    where
+                    \( \tilde t \)
+                    corresponds to new batch size
+                    \( \tilde b \).
+                    It is straightforward to observe that the reasonable learning rate update is
+                </p>
+                \[\begin{aligned}
+                	\lambda^{\text{cl}} \rightarrow \tilde \lambda^{\text{cl}} =
+                	\frac{b}{\tilde b}\,  \lambda^{\text{cl}}.
+                \end{aligned}\]
+                <p>
+                    In other words the
+                    \( b^{-1} \)
+                    coefficient in
+                    <cite><a href="#Fomula-classic-SGD-without-momentum"> (2.1) </a></cite>
+                    is not needed.
+                </p>
+                <p>
+                    The mathematical motivation comes from the Taylor series approximation for small
+                    \( \lambda^{\text{cl}} \)
+                </p>
+                \[\begin{aligned}
+                	g_i(\boldsymbol\theta_n) - g_i(\boldsymbol\theta_{n-1}) = O\left(\left(\lambda^{\text{cl}} \right)^2\right),
+                \end{aligned}\]
+                <p>
+                    because
+                </p>
+                \[\begin{aligned}
+                	\boldsymbol\theta_n - \boldsymbol\theta_{n-1} = O(\lambda^{\text{cl}}).
+                \end{aligned}\]
+                <p>
+                    In order to confirm this analytical reasoning we consider the MNIST problem and 
+                    a simple convolution neural network 
+                    without batch normalization.
+                </p>
+                <div class="wrap-collabsible">
+                    <input id="<label.Label object at 0x7f09837965d0>" class="toggle" type="checkbox">
+                    <label for="<label.Label object at 0x7f09837965d0>" class="lbl-toggle"> Model details </label>
+                    <div class="collapsible-content"> <div class="content-inner">
+                        <code id="python_code"><br>
+                            model&#8194;=&#8194;tf.keras.Sequential([<br>
+                            &#8194;&#8194;&#8194;&#8194;tf.keras.layers.Reshape(input_shape=(28,&#8194;28,&#8194;1),&#8194;target_shape=(28,&#8194;28,&#8194;1)),<br>
+                            &#8194;&#8194;&#8194;&#8194;tf.keras.layers.Conv2D(kernel_size=3,&#8194;filters=12,&#8194;padding='same',&#8194;activation='relu'),<br>
+                            &#8194;&#8194;&#8194;&#8194;tf.keras.layers.Conv2D(kernel_size=6,&#8194;filters=24,&#8194;padding='same',&#8194;strides=2,&#8194;activation='relu'),<br>
+                            &#8194;&#8194;&#8194;&#8194;tf.keras.layers.Conv2D(kernel_size=6,&#8194;filters=32,&#8194;padding='same',&#8194;strides=2,&#8194;activation='relu'),<br>
+                            &#8194;&#8194;&#8194;&#8194;tf.keras.layers.Flatten(),<br>
+                            &#8194;&#8194;&#8194;&#8194;tf.keras.layers.Dense(units=256,&#8194;activation='relu'),<br>
+                            &#8194;&#8194;&#8194;&#8194;tf.keras.layers.Dropout(0.3),<br>
+                            &#8194;&#8194;&#8194;&#8194;tf.keras.layers.Dense(units=10,&#8194;activation=None)<br>
+                            ])
+                        </code>
+                        <p>
+                            The loss function is the standard classification cross-entropy.
+                        </p>
+                    </div> </div>
+                </div>
+                <p>
+                    It is practically unreasonable to compare the weight update sequences directly.
+                    Instead, we consider the entire training progress and its mean loss convergence rate.
+                    The considered model does not suffer from essential overfit. Thereby we present only train dataset means below for simplicity.
+                </p>
+                <p>
+                    It can be verified experimentally that the convergence rate does not depends on
+                    the batch size provided
+                    \( \lambda \)
+                    is fixed, see fig.
+                    <cite><a href="#Fig-batch-size-and-lambda"> 1</a></cite>.
+                </p>
+                <figure id="Fig-batch-size-and-lambda">
+                    <img src="images/batch_size_and_lambda.png">
+                    <figcaption>
+                        Train progress evaluated on MNIST train set 
+                        with respect to the number of elapsed samples (not update steps). 
+                        We can observe that the convergence rate does not depend on the batch size provided
+                        \( \lambda \)
+                        is fixed. On the other hand, the convergence rate, 
+                        calculated in terms of the calculation cost, reduces dramatically for small
+                        \( \lambda \).
+                    </figcaption>
+                </figure>
+                <p>
+                    The speculations above motivates us to normalize the learning rate
+                    \( \lambda \)
+                    as follows
+                </p>
+                \[\begin{aligned}
+                	\boldsymbol\theta_n = 
+                	\boldsymbol\theta_{n-1} - \lambda \sum_{i:~ t(i) = n} \mathbf{g}_i(\boldsymbol\theta_n),
+                \end{aligned}\]
+                <p>
+                    thereby,
+                </p>
+                <div id="Formula-l^lc-=-b-l">
+                    <p class="formula_num"> (2.2) </p>
+                    \[\begin{aligned}
+                    	\lambda^{\text{cl}} = b \, \lambda.
+                    \end{aligned}\]
+                </div>
+                <p>
+                    If the batch size
+                    \( b \)
+                    equals to the dataset size
+                    \( N \)
+                    or it is of the same order of magnitude
+                    \( b \lesssim N \)
+                    the update on each learning step moves the weight closer the minimum.
+                    But this is not the case in the mini-batch strategy when
+                    \( b \ll N \),
+                    because each mini-batch represents very poor statistics of the entire dataset.
+                    The mini-batch learning works due to the numerous of learning steps thanks to an aggregation of data collected from big number of mini-batches.
+                    In the mini-batch learning, it is probably more reasonable to control the total number of samples used for the updates then the actual number of updates.
+                </p>
+                <p>
+                    We have to mention here that similarity of the training weight update sequences on the early and medium training stages does not imply the quality of achieved minima are similar. 
+                    However, our approach also agrees with empirical observations of
+                    <a href="https://arxiv.org/abs/1710.06451" title="https://arxiv.org/abs/1710.06451">
+                    Samuel L. Smith and Quoc V. Le</a>.
+                    It is reported there that
+                    <q>...optimum batch size is proportional to the learning rate...</q>.
+                    In other words, there exist
+                    a batch size independent
+                    \( \lambda \)
+                    that minimizes the final test set loss. 
+                    The optimal minimum is achieved due to a
+                    <q>reasonable</q>
+                    trade off between gradient fluctuation improving generalization ability and caused by small enough mini-batches and
+                    not to big weight updated vector length. See the cited paper for detailed.
+                </p>
+                <p>
+                    Notice, however, that the speculations of this section are valid only if the 
+                    convergence is stable. It becomes unstable if the learning rate or batch size is too large. 
+                    We study this phenomenon briefly in the next section.
+                </p>
+            </section>
+            <section id=Section-convergence-stability>
+                <h2> Convergence stability </h2>
+                <p>
+                    In this section, we investigate experimentally the stability of the neural network training process. It is widely known that the gradient decent usually becomes unstable when the learning rate exceed some value. 
+                    This is straightforward for a classical optimization problem, that is, 
+                    the batch equals to entire dataset. 
+                    However, the instability is more complex for the mini-batch training.
+                </p>
+                <p>
+                    The results for the MNIST problem are presented in fig.
+                    <cite><a href="#Fig-convergence-stability"> 2</a></cite>
+                    ).
+                </p>
+                <figure id="Fig-convergence-stability">
+                    <img src="images/convergence_stability.png">
+                    <figcaption>
+                        Each dot corresponds to a training experiment and the color denotes the loss function value on the training set after 10000 weight updates. If the value is bigger then
+                        \( \log 10 \),
+                        which corresponds to fully random classification for the 10-classes MNIST problem,
+                        we replace it by
+                        \( \log 10 \).
+                        Both images are based on the same data but different learning rate normalization, 
+                        see
+                        <cite><a href="#Formula-l^lc-=-b-l"> (2.2) </a></cite>.
+                        We can observe that the boundary between convergence and divergence modes is consists 
+                        of two approximately line segments. Both segments corresponds to some constant values of
+                        \( \lambda \)
+                        and
+                        \( \lambda^{\text{cl}} \).
+                    </figcaption>
+                </figure>
+                <p>
+                    Our interpretation is as follows.
+                    There are two factors restricting the stability. 
+                    The first one comes from the classical optimization theory.
+                    It is defined by the Hessian of the mean loss function
+                    \(  b^{-1} \sum_{i}{L(x_i,y_i)}  \)
+                    at the minimum.
+                    This is why we have a restriction
+                    \( \lambda^{\text{cl}} \lesssim 10^{-0.5} \).
+                </p>
+                <p>
+                    The second restriction
+                    \( \lambda \lesssim 10^{-1.5} \)
+                    is less trivial. It occurs when the training process is in the mini-batch mode. It means that the batches are not statistically representative 
+                    and the training progress is made thanks to the numerous step accumulation. 
+                    Thereby, the stability of the training depends on
+                    \( \lambda \),
+                    which is a coefficient near the full sum of the gradients, 
+                    but not
+                    \( b \).
+                </p>
+                <p>
+                    We do no go into more details of the stability. 
+                    But we have to mention here that the statements about equivalence of two hyperparameter combinations are valid only if the training process is in the green zone of fig.
+                    <cite><a href="#Fig-convergence-stability"> 2</a></cite>.
+                </p>
+            </section>
+            <section id=Section-Gradient-decent-with-momentum>
+                <h2> Gradient decent with momentum </h2>
+                <p>
+                    Our next step is to equip the gradient decent with the momentum. 
+                    The most widely used parametrization for this approach is as follows
+                </p>
+                <div id="Fomula-classic-SGD-with-momentum">
+                    <p class="formula_num"> (4.1) </p>
+                    \[\begin{aligned}
+                    	\begin{aligned}
+                    		\mathbf{v}^{\text{cl}}_n 
+                    			&= m^{\text{cl}}\, \mathbf{v}^{\text{cl}}_{n-1}
+                    			- \lambda^{\text{cl}}\, b^{-1} \sum_{i:~ t(i) = n} \mathbf{g}_i(\boldsymbol\theta_n) \\
+                    		\mathbf{\boldsymbol\theta}_n &= 
+                    			\boldsymbol\theta_{n-1} + \mathbf{v}^{\text{cl}}_n
+                    	\end{aligned},\quad
+                    	0 \leq m^{\text{cl}} <1, \quad
+                    	\lambda^{\text{cl}} > 0  
+                    \end{aligned}\]
+                </div>
+                <p>
+                    There is a widely mentioned 
+                    physical interpretation
+                    for the parameter
+                    \( \mathbf{v}^{\text{cl}} \).
+                    Indeed, if we consider
+                    \( n \)
+                    as a discrete
+                    <q>time</q>
+                    then
+                    \( \mathbf{v}^{\text{cl}} \)
+                    can be understood as
+                    <q>velocity</q>
+                    and the batch averaged gradient plays the role of
+                    <q>acceleration</q>.
+                    We focus on a different aspect of the momentum trick here.
+                </p>
+                <p>
+                    The exponential moving average for the sequence
+                    \( \{g_n\}_{n=0,1,2,\dotso} \)
+                    is a sequence
+                    \( \{\mu_n\}_{n=0,1,2,\dotso} \)
+                    defined by the recurrent relation
+                </p>
+                \[\begin{aligned}
+                	\mu_n = m\, \mu_{n-1} + (1 - m)\, g_n, \quad 0 \leq m < 1
+                \end{aligned}\]
+                <p>
+                    with some initial condition for
+                    \( \mu_0 \)
+                    that we are not interested.
+                    Integrating it up we have
+                </p>
+                \[\begin{aligned}
+                	\mu_n = (1 - m)\sum_{k=0,1,2,\dotso} \, m^k\, g_{n-k}.
+                \end{aligned}\]
+                <p>
+                    Thereby, the momentum trick is nothing else then the smoothing of gradients calculated 
+                    on the previous steps. 
+                    Equivalently, 
+                    instead of taking into account at step
+                    \( n \)
+                    only the gradients calculated at the current weight
+                    \( \boldsymbol\theta_n \),
+                    we sum up gradients obtained at all previous weights
+                    \( \boldsymbol\theta_{n-1} \),
+                    \( \boldsymbol\theta_{n-2} \),
+                    \( \boldsymbol\theta_{n-3} \),
+                    and so on with decreasing weights coefficients
+                    \( (1-m)m \),
+                    \( (1-m)m^2 \),
+                    \( (1-m)m^3 \),
+                    correspondingly.
+                    Notice that the sum of the weights is normalized
+                </p>
+                \[\begin{aligned}
+                	(1-m)\sum_{k=0,1,2,\dotso} \, m^k = 1, \quad 0 \leq m < 1.
+                \end{aligned}\]
+                <p>
+                    The parameter
+                    \( m \)
+                    is responsible for the rate of the weight decreasing. 
+                    We wish to make this rate fixed in terms of sample counting but not update steps as usual.
+                    Namely, the weight coefficient with which each single sample gradient
+                    \( g_i \)
+                    contributes should be modified minimally with the transform from one batch size to another. This implies
+                </p>
+                <div id="Formula-m^1/b-=-m^1/b">
+                    <p class="formula_num"> (4.5) </p>
+                    \[\begin{aligned}
+                    	\sqrt[b]{m} = \sqrt[\tilde b]{\tilde m}.
+                    \end{aligned}\]
+                </div>
+                <p>
+                    In other words, with the batch size change the momentum must be rescaled as
+                </p>
+                <div id="Formula-m->m^b/b">
+                    <p class="formula_num"> (4.6) </p>
+                    \[\begin{aligned}
+                    	m \rightarrow \tilde m = m^{\frac{\tilde b}{b}}
+                    \end{aligned}\]
+                </div>
+                <p>
+                    in order to keep the same manner for the gradient smoothing over samples. 
+                    Fig
+                    <cite><a href="#Fig-momentum-weigth-coefficients"> 3</a></cite>
+                    can probably illustrates this idea better then words and formulas.
+                </p>
+                <figure id="Fig-momentum-weigth-coefficients">
+                    <img src="images/momentum_weigth_coefficients.png">
+                    <figcaption>
+                        Weight coefficients with which each sample gradient
+                        \( g_i \)
+                        contributes to train step with 
+                        condition
+                        <cite><a href="#Formula-m^1/b-=-m^1/b"> (4.5) </a></cite>.
+                        The batch sizes are
+                        \( 4 \)
+                        and
+                        \( 16 \),
+                        and
+                        \( \sqrt[b]{m} = \sqrt[\tilde b]{\tilde m} = 0.03 \).
+                        The x-axis corresponds to the reverse sample counting.
+                        The weight coefficients values are visually combined into blocks of sized
+                        \( b=4 \)
+                        or
+                        \( \tilde b = 16 \)
+                        depending on the batch size.
+                        The image illustrates that in spite of different batch size the momentums can be tuned 
+                        such that the weight coefficients are closed by their value.
+                    </figcaption>
+                </figure>
+                <p>
+                    <em>The ultimate goal of our gradient decent hyperparameter reparametrization is to split out the technical part related to data parallelism and real smoothing between gradients during the minima search.</em>
+                    This motivates an alternative parametrization for 
+                    (\ref{Fomula: classic SGD with momentum})
+                    as follows.
+                </p>
+                <div id="Formula-SGD-with-momentum-reparametrized">
+                    <p class="formula_num"> (4.7) </p>
+                    \[\begin{aligned}
+                    	\begin{aligned}
+                    		\mathbf{v}_n &= e^{-\frac{b}{\beta}}\, \mathbf{v}_{n-1}
+                    		 	+ (1 - e^{-\frac{b}{\beta}})\, \sum_{i:\, t(i) = n} \mathbf{g}_i(\boldsymbol\theta_n) \\
+                    		\boldsymbol\theta_n &= 
+                    			\boldsymbol\theta_{n-1} - \lambda\, \mathbf{v}_n
+                    	\end{aligned},\quad
+                    	\beta \geq 0, \quad
+                    	\lambda > 0.
+                    \end{aligned}\]
+                </div>
+                <p>
+                    The case
+                    \( \beta = 0 \)
+                    corresponds to
+                    \( m=0 \).
+                    The bigger value
+                    \( \beta \)
+                    the stronger smoothing.
+                </p>
+                <p>
+                    The advantage of the parametrization above is that we do not have to change 
+                    the fine tuned hyperparameters
+                    \( \lambda \)
+                    and
+                    \( \beta \)
+                    while moving to a different hardware.
+                    It is enough to just set the batch size
+                    \( b \)
+                    as big as possible or until we face with the convergence stability restrictions 
+                    form section
+                    <cite><a href="#Section-convergence-stability"> 3</a></cite>.
+                    An experimental confirmation is presented in fig.
+                    <cite><a href="#Fig-batch-size-and-momentum"> 4</a></cite>.
+                </p>
+                <figure id="Fig-batch-size-and-momentum">
+                    <img src="images/batch_size_and_momentum.png">
+                    <figcaption>
+                        Training progress on the train MNIST dataset with various values of the batch size
+                        \( b \)
+                        and
+                        \( \beta \)
+                        from
+                        <cite><a href="#Formula-SGD-with-momentum-reparametrized"> (4.7) </a></cite>.
+                        For each pair of
+                        \( b \)
+                        and
+                        \( \beta \)
+                        values we sampled 3 experiments that are demonstrated by 3 corresponding curves of the same color and style.
+                        It can be observed that batch size change has no visible effect on the loss decay rate
+                        with respect to the total number of samples feeded.
+                        It is also remarkable that the smaller values for 
+                        momentum parameter
+                        \( \beta \)
+                        provides faster convergence in our case. This may be different for other problems.
+                    </figcaption>
+                </figure>
+                <p>
+                    Notice, however, that for
+                    \( b \gtrsim \beta \)
+                    the momentum smoothing is weak with respect to
+                    <q>batch</q>
+                    smoothing and the approximation illustrated in fig.
+                    <cite><a href="#Fig-momentum-weigth-coefficients"> 3</a></cite>
+                    is not longer valid.
+                </p>
+                <p>
+                    The relations between proposed and classic hyperparameter normalization are
+                    \[\begin{aligned}
+                    m^{\text{cl}} &= e^{-\frac{b}{\beta}} \\ 
+                    \lambda^{\text{cl}} &= \left(1 - e^{-\frac{b}{\beta}} \right) \lambda\, b^{-1}   
+                    \end{aligned}\]
+                </p>
+            </section>
+            <section id=Section-Adam-gradient-decent-case>
+                <h2> Adam gradient decent case </h2>
+                <p>
+                    For other gradient decent methods our approach is similar. 
+                    For example, Adam gradient decent in its classic parametrization in our notations is
+                </p>
+                <div id="Fomula-Adam-SGD">
+                    <p class="formula_num"> (5.1) </p>
+                    \[\begin{aligned}
+                    	\begin{aligned}
+                    		\mathbf{v}^{\text{cl}}_n 
+                    			&= \beta_1^{\text{cl}}\, \mathbf{v}^{\text{cl}}_{n-1}
+                    			+ (1 - \beta_1^{\text{cl}})\, b^{-1} \sum_{i:~ t(i) = n} \mathbf{g}_i(\boldsymbol\theta_n), \\
+                    		\mathbf{w}^{\text{cl}}_n 
+                    			&= \beta_2^{\text{cl}}\, \mathbf{w}^{\text{cl}}_{n-1}
+                    			+ (1 - \beta_2^{\text{cl}})\, 
+                    				\left[
+                    					b^{-1} \sum_{i:~ t(i) = n} \mathbf{g}_i(\boldsymbol\theta_n) 
+                    				\right]^2, \\
+                    		\boldsymbol\theta_n &= 
+                    			\boldsymbol\theta_{n-1} - \alpha^{\text{cl}} \frac
+                    				{\mathbf{m}^{\text{cl}}_n}
+                    				{\sqrt{\mathbf{v}^{\text{cl}}_n} + \varepsilon^{\text{cl}}}, \\
+                    		&0 \leq \beta_1^{\text{cl}} <1, \quad
+                    		0 \leq \beta_2^{\text{cl}} <1, \quad
+                    		\alpha^{\text{cl}} > 0, \quad
+                    		\varepsilon^{\text{cl}} > 0,
+                    	\end{aligned}
+                    \end{aligned}\]
+                </div>
+                <p>
+                    where the square and square root operations of a vector are elementwise. 
+                    We proposed the normalization
+                    \[\begin{aligned}
+                    \mathbf{v}_n 
+                    &= e^{-\frac{b}{\beta_1}}\, \mathbf{v}_{n-1}
+                    + (1 - e^{-\frac{b}{\beta_1}})\, \sum_{i:~ t(i) = n} \mathbf{g}_i(w_n), \\
+                    \mathbf{w}_n 
+                    &= e^{-\frac{b}{\beta_2}}\, \mathbf{w}_{n-1}
+                    + (1 - e^{-\frac{b}{\beta_2}})\, 
+                    \sum_{i:~ t(i) = n} \mathbf{g}_i(w_n)^2, \\
+                    \boldsymbol\theta_n &= 
+                    \boldsymbol\theta_{n-1} - \alpha \frac
+                    {\mathbf{v}_n}
+                    {\sqrt{\mathbf{w}_n} + b\, \varepsilon}, \\
+                    & 0 \leq \beta_1, \quad
+                    0 \leq \beta_2, \quad
+                    \alpha > 0, \quad 
+                    \varepsilon > 0,
+                    \end{aligned}\]
+                    where we have to step a side a bit from the original Adam algorithm and replace the square of the gradient sum by the sum of gradient squares along the batch. It can be empirically check that the typical values of
+                    \( (\sum g)^2 \)
+                    and
+                    \( \sum g^2 \)
+                    are of the same order of magnitude. 
+                    At least for the considered MNIST model typical values of
+                    \( \sum g^2 \)
+                    are approximately two times smaller then
+                    \( (\sum g)^2 \)
+                    or equal.
+                </p>
+                <p>
+                    Ignoring the last remark, the relations between the proposed and the classic normalizations are
+                </p>
+                <div id="Formula-Adam-hyparameter-relation">
+                    <p class="formula_num"> (5.2) </p>
+                    \[\begin{aligned}
+                    	\begin{aligned}
+                    		\beta_1^{\text{cl}} &= e^{-\frac{b}{\beta_1}} \\ 
+                    		\beta_2^{\text{cl}} &= e^{-\frac{b}{\beta_2}} \\ 
+                    		\alpha^{\text{cl}} &= \alpha \\
+                    		\varepsilon^{\text{cl}} &= b\,\varepsilon
+                    	\end{aligned}
+                    \end{aligned}\]
+                </div>
+            </section>
+            <section id=Section-Gradient-accumulation-technique>
+                <h2> Gradient accumulation technique </h2>
+                <p>
+                    The relation between momentum and batch size discussed above is quite straightforward. 
+                    However, there is a quite widely used
+                    <a href="https://towardsdatascience.com/what-is-gradient-accumulation-in-deep-learning-ec034122cfa" title="https://towardsdatascience.com/what-is-gradient-accumulation-in-deep-learning-ec034122cfa">
+                    technique</a>
+                    called
+                    <em>gradient accumulation</em>.
+                    According to this approach, we have to sum up gradients obtained from several batches
+                    obtained for the same weight value. Thereby, the actual batch size can be increased infinitely
+                    and GPU RAM is not longer a restriction.
+                    Such a technique can be fruitful, but it cannot provide anything new
+                    if we already use nontrivial momentum such that
+                    \( \beta \lesssim b \).
+                    For zero momentum, however, the equivalence is not the case, strictly speaking.
+                    But it would be very exciting to get familiar with a deep learning case 
+                    such that SGD with a big batch size without momentum is more efficient then the SGD with a momentum.
+                </p>
+            </section>
+            <section id=Section-Conclusion>
+                <h2> Conclusion </h2>
+                <p>
+                    We suggest a strategy to fine tune the gradient decent hyperparameters as follows.
+                    Use hyper parameter normalization as it is described above, for example 
+                    \eqref(ormula: Adam hyparameter relation).
+                    As the result of this, we can control the convergence rate while batch size change.
+                    It may happen, however, following the increase of the batch size the convergence stability may be lost.
+                    This case we can either reduce
+                    \( \lambda \)
+                    to restore the convergence or refuse from the batch size change.
+                    The second option has an advantage of faster convergence with respect to total calculation cost.
+                </p>
+                <p>
+                    Remark that we did not consider batch normalization technique here. 
+                    This requires additional study because for different batch sizes we have different gradient fluctuation intensity that impacts final minimum generalization ability. See, for example,
+                    <a href="https://arxiv.org/pdf/1802.06455.pdf" title="https://arxiv.org/pdf/1802.06455.pdf">
+                    Mattias Teye, Hossein Azizpour, Kevin Smith</a>.
+                </p>
+            </section>
+            <hr>
+            <p>
+                <em>
+                    If you have any questions, remarks, or other feedback please use
+                    <a href="https://t.me/Alexey_Tochin"> telegram </a>,
+                    <a href="mailto:Alexey.Tochin@gmail.com"> e-mail</a>,
+                    or
+                    <a href="https://github.com/alexeytochin/alexeytochin.github.io/discussions/8"> this github forum </a>
+                    for open discussions.
+                </em>
+            </p>
+    </article>
+</section>
+
+<script src="../../js/toc.js"></script>
+<script src="../../js/script.js"></script>
+
+</body>
+</html>
