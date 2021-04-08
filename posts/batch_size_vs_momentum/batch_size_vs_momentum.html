@@ -25,7 +25,7 @@
             <a class="nav menu" href="#"><span class='icons'>☰</span></a>
             <nav role="navigation">
                 <ul>
-                    <li><a href="../../index.html"> Home </a></li>
+                    <li><a href="../../home.html"> Home </a></li>
                     <li><a href="../../machine_learning.html"> Machine Learning </a></li>
                     <li><a href="../../other_topics.html"> Other topics </a></li>
                     <li><a href="../../about.html"> About </a></li>
@@ -141,7 +141,7 @@
                     <p class="formula_num"> (2.1) </p>
                     \[\begin{aligned}
                     	\boldsymbol\theta_{n-1}~ \rightarrow~ \boldsymbol\theta_n := 
-                    	\boldsymbol\theta_{n-1} - \lambda^{\text{cl}} \, b^{-1} \sum_{i:~ t(i) = n} \mathbf{g}_i(w_n)
+                    	\boldsymbol\theta_{n-1} - \lambda^{\text{cl}} \, b^{-1} \sum_{i:~ t(i) = n} \mathbf{g}_i(\boldsymbol\theta_n)
                     \end{aligned}\]
                 </div>
                 <p>
@@ -149,7 +149,7 @@
                     <q>\( ~^{\text{cl}} \)</q>
                     is for
                     <q>classically normalized</q>
-                    parameters that we are going to renormalize.
+                    hyperparameter normalization that we are going to reconsider.
                 </p>
                 <p>
                     Suppose the batch size
@@ -187,11 +187,23 @@
                     is not needed.
                 </p>
                 <p>
+                    For example, if we increase the batch size by factor
+                    \(  k  \)
+                    the total contribution 
+                    of the samples from
+                    \(  k  \)
+                    steps is replaced by a sum of gradients form a single step with the same set of samples.  
+                    The only difference between these sums is that in the second case all gradient are calculated 
+                    at the same weight while in the first case there are
+                    \(  k  \)
+                    different but closed wights.
+                </p>
+                <p>
                     The mathematical motivation comes from the Taylor series approximation for small
                     \( \lambda^{\text{cl}} \)
                 </p>
                 \[\begin{aligned}
-                	g_i(\boldsymbol\theta_n) - g_i(\boldsymbol\theta_{n-1}) = O\left(\left(\lambda^{\text{cl}} \right)^2\right),
+                	\mathbf{g}_i(\boldsymbol\theta_n) - \mathbf{g}_i(\boldsymbol\theta_{n-1}) = O\left(\left(\lambda^{\text{cl}} \right)^2\right),
                 \end{aligned}\]
                 <p>
                     because
@@ -205,8 +217,8 @@
                     without batch normalization.
                 </p>
                 <div class="wrap-collabsible">
-                    <input id="<label.Label object at 0x7f09837965d0>" class="toggle" type="checkbox">
-                    <label for="<label.Label object at 0x7f09837965d0>" class="lbl-toggle"> Model details </label>
+                    <input id="<label.Label object at 0x7fb504434910>" class="toggle" type="checkbox">
+                    <label for="<label.Label object at 0x7fb504434910>" class="lbl-toggle"> Model details </label>
                     <div class="collapsible-content"> <div class="content-inner">
                         <code id="python_code"><br>
                             model&#8194;=&#8194;tf.keras.Sequential([<br>
@@ -279,7 +291,7 @@
                     \( b \ll N \),
                     because each mini-batch represents very poor statistics of the entire dataset.
                     The mini-batch learning works due to the numerous of learning steps thanks to an aggregation of data collected from big number of mini-batches.
-                    In the mini-batch learning, it is probably more reasonable to control the total number of samples used for the updates then the actual number of updates.
+                    <em>In the mini-batch learning, it is probably more reasonable to control the total number of samples used for the updates then the actual number of updates.</em>
                 </p>
                 <p>
                     We have to mention here that similarity of the training weight update sequences on the early and medium training stages does not imply the quality of achieved minima are similar. 
