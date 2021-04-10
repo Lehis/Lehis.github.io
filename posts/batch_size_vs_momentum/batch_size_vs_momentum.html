@@ -72,7 +72,7 @@
                 How should we scale up the gradient decent hyperparameters and do not knock down the settings?
                 We address this question and 
                 some familiar ones in this article. 
-                The main thesis of this paper:
+                The main thesis:
                 <em>batch size change is approximately equivalent to a certain shift of learning rate and momentum</em>.
             </p>
             <section id=Section-Notation>
@@ -217,8 +217,8 @@
                     without batch normalization.
                 </p>
                 <div class="wrap-collabsible">
-                    <input id="<label.Label object at 0x7fb504434910>" class="toggle" type="checkbox">
-                    <label for="<label.Label object at 0x7fb504434910>" class="lbl-toggle"> Model details </label>
+                    <input id="<label.Label object at 0x7f1164b9f250>" class="toggle" type="checkbox">
+                    <label for="<label.Label object at 0x7f1164b9f250>" class="lbl-toggle"> Model details </label>
                     <div class="collapsible-content"> <div class="content-inner">
                         <code id="python_code"><br>
                             model&#8194;=&#8194;tf.keras.Sequential([<br>
@@ -687,8 +687,8 @@
                 <h2> Conclusion </h2>
                 <p>
                     We suggest a strategy to fine tune the gradient decent hyperparameters as follows.
-                    Use hyper parameter normalization as it is described above, for example 
-                    \eqref(ormula: Adam hyparameter relation).
+                    Use hyper parameter normalization as it is described above, for example
+                    <cite><a href="#Formula-Adam-hyparameter-relation"> (5.2) </a></cite>.
                     As the result of this, we can control the convergence rate while batch size change.
                     It may happen, however, following the increase of the batch size the convergence stability may be lost.
                     This case we can either reduce

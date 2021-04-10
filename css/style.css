@@ -676,7 +676,7 @@ header.site-header nav ul li a:hover {
 .archive-wrap .post-list li h1 {
     font-size: 32px;
     font-style: italic; }
-.archive-wrap .post-list .summary {
+.archive-wrap .post-list .abstract {
     position: relative;
     display: block;
     font-size: 20px;

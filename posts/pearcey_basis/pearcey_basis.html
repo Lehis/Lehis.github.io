@@ -83,7 +83,6 @@
                 <h1>Pearcey Kernel Basis: <br/> Beyond Second Order Differential Eigenvalue Equations </h1>
             </hgroup>
         </header>
-
         <section>
             <p class="abstract">
                 There is a known connection between orthogonal polynomials,
@@ -105,9 +104,7 @@
                 Circular Law for random matrices, Airy kernel, and determinantal point process
                 this section can be skipped without loss of understanding.
             </p>
-
         </section>
-
         <section id="crash-introduction">
             <header class="post-header"><hgroup><h2>Crash Introduction</h2></hgroup></header>
             <section id="orthogonal-matrix-ensemble">
@@ -177,7 +174,6 @@
                     </figcaption>
                 </figure>
             </section>
-
             <section id="determinantal-point-process">
                 <h3>Determinantal point process</h3>
                 <p>
@@ -319,7 +315,6 @@
                 </div>
                 <p>
                     Thereby, there is a relation between random law on the set of real numbers
-<!--                    \rho_N( \lambda_0, \lambda_1, \dotso \lambda_{N-1} )-->
                     defined by kernel
                     \( K_N(x,y) \)
                     and an orthogonal basis
@@ -369,7 +364,6 @@
                     $$
                 </p>
             </section>
-
             <section id="Scaling-limit">
                 <h3>Scaling limit</h3>
                 <p>
@@ -701,7 +695,6 @@
                 </p>
             </section>
         </section>
-
         <section id="pearcey-kernel">
             <header class="post-header"><hgroup><h2>Pearcey Kernel</h2></hgroup></header>
             <section id="biased-unitary-ensemble">
@@ -1204,8 +1197,6 @@
                     </p>
                     <p>
                         The pair of collections
-                        <!--                    \{ {e^{\mathrm{Pear}}}_\lambda^\dag \}_{\lambda\in\mathbb{R}} :=-->
-                        <!--                    \{ {e^{\mathrm{Pear}}}_\lambda \}_{\lambda\in\mathbb{R}} :=-->
                         $$
                             \{-2^{-\frac12} \psi_{\lambda}', 2^{-\frac12} \psi_{\lambda}\}_{\lambda\in\mathbb{R}}, \quad
                             \{2^{-\frac12} \phi_{\lambda}, 2^{-\frac12} \phi_{\lambda}' \}_{\lambda\in\mathbb{R}}
@@ -1247,123 +1238,123 @@
                         where
                         \( \delta \)
                         is the Dirac delta function.
-                        <div class="wrap-collabsible">
-                            <input id="pearcey-completness-proof" class="toggle" type="checkbox">
-                            <label for="pearcey-completness-proof" class="lbl-toggle"> Details and proofs </label>
-                            <div class="collapsible-content">
-                                <div class="content-inner">
-                                    <p>
-                                        \[\begin{aligned}
-                                            &\int\limits_{-\infty}^{+\infty} dx\,
-                                            \psi_{\lambda}'(x) \phi_{\mu}(x)
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du
-                                            \int\limits_{-\infty}^{+\infty} dx\,
-                                            u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2} + u x
-                                            - \frac{t^4}{4} - \frac{\mu t^2}{2} - itx}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2}
-                                            - \frac{(t-iu )^4}{4} - \frac{\mu (t-iu)^2}{2} }
-                                            \int\limits_{-\infty}^{+\infty} dx\,
-                                            e^{-i t x}
-                                            =\\=&
-                                            \frac{1}{2\pi i}
-                                            \int\limits_{\mathcal{C}} du
-                                            \left.
-                                            u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2}
-                                            - \frac{(t-iu )^4}{4} - \frac{\mu (t-iu)^2}{2} }
-                                            \right|_{t=0}
-                                            =\\=&
-                                            \frac{1}{2\pi i}
-                                            \int\limits_{\mathcal{C}} du\,
-                                            u \,e^{  - \frac{\lambda u^2}{2}
-                                            + \frac{\mu u^2}{2} }
-                                            =\\=&
-                                            \frac{1}{2\pi i}
-                                            \int\limits_{\mathcal{C}} d\frac{u^2}{2}\,
-                                            e^{ - \frac{\lambda u^2}{2}
-                                            + \frac{\mu u^2}{2} }
-                                            =\\=&
-                                            \frac{-2}{2\pi }
-                                            \int\limits_{-\infty}^{\infty} d  t \,
-                                            e^{ - i \lambda t + i \mu t}
-                                            =\\=&
-                                            -2\,\delta(\lambda-\mu).
-                                        \end{aligned}\]
-                                        Other 3 statements can be show in the same manner.
-                                        The last identity can be proved as follows
-                                        \[\begin{aligned}
-                                            &\frac12 \int\limits_{-\infty}^{+\infty} d\lambda
-                                            \left(
-                                            \phi_{\lambda}{}'(x) \psi_{\lambda}(y)
-                                            - \phi_{\lambda}(x) \psi_{\lambda}{}'(y)
-                                            \right)
-                                            =\\=&
-                                            \int\limits_{-\infty}^{+\infty} d\lambda
-                                            \frac{1}{2(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            (-it-u)
-                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                            =\\=&
-                                            \frac{-1}{2(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \int\limits_{-\infty}^{+\infty} d\lambda
-                                            \frac{u^2+t^2}{u-it}
-                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                            =\\=&
-                                            -\frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \int\limits_{-\Lambda}^{+\infty} d\lambda
-                                            \frac{-\partial_{\lambda}}{u-it}
-                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                            =\\=&
-                                            \frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}}{u-it}
-                                            =\\=&
-                                            \frac{ \lim_{\Lambda \to +\infty} }{2\pi}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \left.
-                                            e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}
-                                            \right|_{u=it}
-                                            +\\+&
-                                            \frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}'} du\,
-                                            \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}}{u-it}.
-                                        \end{aligned}\]
-                                        The first term in the last expression is the result of the contour integration by
-                                        \( u \)
-                                        around
-                                        \( u = it \).
-                                        In the second integral, the contour
-                                        \( \mathcal{C}' \)
-                                        is the rest part of
-                                        \( \mathcal{C} \).
-                                        It tends to zero while
-                                        \( \Lambda \)
-                                        tends to infinity.
-                                        We continue the calculation by
-                                        $$
-                                            \dotso = \frac{ \lim_{\Lambda \to +\infty} }{2\pi}
-                                            \int\limits_{-\infty}^{+\infty} dt\,
-                                            e^{ - itx  + i t y + \frac{\Lambda}{2}\cdot 0} =
-                                            \delta(x-y).
-                                        $$
-                                    </p>
-                                </div>
+                    </p>
+                    <div class="wrap-collabsible">
+                        <input id="pearcey-completness-proof" class="toggle" type="checkbox">
+                        <label for="pearcey-completness-proof" class="lbl-toggle"> Details and proofs </label>
+                        <div class="collapsible-content">
+                            <div class="content-inner">
+                                <p>
+                                    \[\begin{aligned}
+                                        &\int\limits_{-\infty}^{+\infty} dx\,
+                                        \psi_{\lambda}'(x) \phi_{\mu}(x)
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du
+                                        \int\limits_{-\infty}^{+\infty} dx\,
+                                        u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2} + u x
+                                        - \frac{t^4}{4} - \frac{\mu t^2}{2} - itx}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2}
+                                        - \frac{(t-iu )^4}{4} - \frac{\mu (t-iu)^2}{2} }
+                                        \int\limits_{-\infty}^{+\infty} dx\,
+                                        e^{-i t x}
+                                        =\\=&
+                                        \frac{1}{2\pi i}
+                                        \int\limits_{\mathcal{C}} du
+                                        \left.
+                                        u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2}
+                                        - \frac{(t-iu )^4}{4} - \frac{\mu (t-iu)^2}{2} }
+                                        \right|_{t=0}
+                                        =\\=&
+                                        \frac{1}{2\pi i}
+                                        \int\limits_{\mathcal{C}} du\,
+                                        u \,e^{  - \frac{\lambda u^2}{2}
+                                        + \frac{\mu u^2}{2} }
+                                        =\\=&
+                                        \frac{1}{2\pi i}
+                                        \int\limits_{\mathcal{C}} d\frac{u^2}{2}\,
+                                        e^{ - \frac{\lambda u^2}{2}
+                                        + \frac{\mu u^2}{2} }
+                                        =\\=&
+                                        \frac{-2}{2\pi }
+                                        \int\limits_{-\infty}^{\infty} d  t \,
+                                        e^{ - i \lambda t + i \mu t}
+                                        =\\=&
+                                        -2\,\delta(\lambda-\mu).
+                                    \end{aligned}\]
+                                    Other 3 statements can be show in the same manner.
+                                    The last identity can be proved as follows
+                                    \[\begin{aligned}
+                                        &\frac12 \int\limits_{-\infty}^{+\infty} d\lambda
+                                        \left(
+                                        \phi_{\lambda}{}'(x) \psi_{\lambda}(y)
+                                        - \phi_{\lambda}(x) \psi_{\lambda}{}'(y)
+                                        \right)
+                                        =\\=&
+                                        \int\limits_{-\infty}^{+\infty} d\lambda
+                                        \frac{1}{2(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        (-it-u)
+                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                        =\\=&
+                                        \frac{-1}{2(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \int\limits_{-\infty}^{+\infty} d\lambda
+                                        \frac{u^2+t^2}{u-it}
+                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                        =\\=&
+                                        -\frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \int\limits_{-\Lambda}^{+\infty} d\lambda
+                                        \frac{-\partial_{\lambda}}{u-it}
+                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                        =\\=&
+                                        \frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}}{u-it}
+                                        =\\=&
+                                        \frac{ \lim_{\Lambda \to +\infty} }{2\pi}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \left.
+                                        e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}
+                                        \right|_{u=it}
+                                        +\\+&
+                                        \frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}'} du\,
+                                        \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}}{u-it}.
+                                    \end{aligned}\]
+                                    The first term in the last expression is the result of the contour integration by
+                                    \( u \)
+                                    around
+                                    \( u = it \).
+                                    In the second integral, the contour
+                                    \( \mathcal{C}' \)
+                                    is the rest part of
+                                    \( \mathcal{C} \).
+                                    It tends to zero while
+                                    \( \Lambda \)
+                                    tends to infinity.
+                                    We continue the calculation by
+                                    $$
+                                        \dotso = \frac{ \lim_{\Lambda \to +\infty} }{2\pi}
+                                        \int\limits_{-\infty}^{+\infty} dt\,
+                                        e^{ - itx  + i t y + \frac{\Lambda}{2}\cdot 0} =
+                                        \delta(x-y).
+                                    $$
+                                </p>
                             </div>
                         </div>
-                    </p>
+                    </div>
                     <p>
                         The Pearcey kernel can thus be decomposed as follows
                         $$
@@ -1374,83 +1365,83 @@
                             - \phi_{\lambda}(x) \psi_{\lambda}'(y)
                             \right).
                         $$
-                        <div class="wrap-collabsible">
-                            <input id="pearcey-decomposition-proof" class="toggle" type="checkbox">
-                            <label for="pearcey-decomposition-proof" class="lbl-toggle"> Details and proofs </label>
-                            <div class="collapsible-content">
-                                <div class="content-inner">
-                                    <p>
-                                        \[\begin{aligned}
-                                            &\frac12 \int\limits_{0}^{+\infty} d\lambda
-                                            \left(
-                                            \phi_{\lambda}(x) \psi_{\lambda}'(y)
-                                            - \phi_{\lambda}(x)' \psi_{\lambda}(y)
-                                            \right)
-                                            =\\=&
-                                            \int\limits_{0}^{+\infty} d\lambda
-                                            \frac{1}{2(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            (u+it)
-                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \int\limits_{0}^{+\infty} d\lambda
-                                            \frac{u^2+t^2}{u-it}
-                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \int\limits_{0}^{+\infty} d\lambda
-                                            \frac{-\partial_{\lambda}}{u-it}
-                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y }}{u-it}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \frac{e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
-                                            (i\partial_t-\partial_u)
-                                            e^{ - itx +  u y}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            e^{ - itx +  u y}
-                                            (i\partial_t-\partial_u)
-                                            \frac{e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            e^{ - itx +  u y}
-                                            \frac{ (-i t^3 - u^3 ) e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \frac{ ( t^2 - itu - u^2 ) e^{-\frac{t^4}{4} + \frac{u^4}{4}  - itx +  u y } }{x-y}
-                                            =\\=&
-                                            \frac{1}{(2\pi)^2 i}
-                                            \int\limits_{-\infty}^{+\infty} dt
-                                            \int\limits_{\mathcal{C}} du\,
-                                            \frac{ ( -\partial_x^2 + \partial_x \partial_y - \partial_y ^2 ) e^{-\frac{t^4}{4} + \frac{u^4}{4}  - itx +  u y } }{x-y}
-                                            =\\=&
-                                            \frac{\phi'(x)\psi'(y)-\phi''(x)\psi(y)-\phi(x)\psi''(y) }{x-y}
-                                            =K(x,y).
-                                        \end{aligned}\]
-                                    </p>
-                                </div>
+                    </p>
+                    <div class="wrap-collabsible">
+                        <input id="pearcey-decomposition-proof" class="toggle" type="checkbox">
+                        <label for="pearcey-decomposition-proof" class="lbl-toggle"> Details and proofs </label>
+                        <div class="collapsible-content">
+                            <div class="content-inner">
+                                <p>
+                                    \[\begin{aligned}
+                                        &\frac12 \int\limits_{0}^{+\infty} d\lambda
+                                        \left(
+                                        \phi_{\lambda}(x) \psi_{\lambda}'(y)
+                                        - \phi_{\lambda}(x)' \psi_{\lambda}(y)
+                                        \right)
+                                        =\\=&
+                                        \int\limits_{0}^{+\infty} d\lambda
+                                        \frac{1}{2(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        (u+it)
+                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \int\limits_{0}^{+\infty} d\lambda
+                                        \frac{u^2+t^2}{u-it}
+                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \int\limits_{0}^{+\infty} d\lambda
+                                        \frac{-\partial_{\lambda}}{u-it}
+                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y }}{u-it}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \frac{e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
+                                        (i\partial_t-\partial_u)
+                                        e^{ - itx +  u y}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        e^{ - itx +  u y}
+                                        (i\partial_t-\partial_u)
+                                        \frac{e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        e^{ - itx +  u y}
+                                        \frac{ (-i t^3 - u^3 ) e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \frac{ ( t^2 - itu - u^2 ) e^{-\frac{t^4}{4} + \frac{u^4}{4}  - itx +  u y } }{x-y}
+                                        =\\=&
+                                        \frac{1}{(2\pi)^2 i}
+                                        \int\limits_{-\infty}^{+\infty} dt
+                                        \int\limits_{\mathcal{C}} du\,
+                                        \frac{ ( -\partial_x^2 + \partial_x \partial_y - \partial_y ^2 ) e^{-\frac{t^4}{4} + \frac{u^4}{4}  - itx +  u y } }{x-y}
+                                        =\\=&
+                                        \frac{\phi'(x)\psi'(y)-\phi''(x)\psi(y)-\phi(x)\psi''(y) }{x-y}
+                                        =K(x,y).
+                                    \end{aligned}\]
+                                </p>
                             </div>
                         </div>
-                    </p>
+                    </div>
                     <p>
                         This is similar to the
                         <cite><a href="#airy-kernel"> Airy kernel decomposition (1.4.3)</a></cite>,
