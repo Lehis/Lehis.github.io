@@ -217,8 +217,8 @@
                     without batch normalization.
                 </p>
                 <div class="wrap-collabsible">
-                    <input id="<label.Label object at 0x7f1164b9f250>" class="toggle" type="checkbox">
-                    <label for="<label.Label object at 0x7f1164b9f250>" class="lbl-toggle"> Model details </label>
+                    <input id="<label.Label object at 0x7f7189f58c10>" class="toggle" type="checkbox">
+                    <label for="<label.Label object at 0x7f7189f58c10>" class="lbl-toggle"> Model details </label>
                     <div class="collapsible-content"> <div class="content-inner">
                         <code id="python_code"><br>
                             model&#8194;=&#8194;tf.keras.Sequential([<br>
@@ -672,15 +672,23 @@
                     technique</a>
                     called
                     <em>gradient accumulation</em>.
-                    According to this approach, we have to sum up gradients obtained from several batches
+                    According to this approach, we sum up gradients from from several batches
                     obtained for the same weight value. Thereby, the actual batch size can be increased infinitely
                     and GPU RAM is not longer a restriction.
-                    Such a technique can be fruitful, but it cannot provide anything new
-                    if we already use nontrivial momentum such that
-                    \( \beta \lesssim b \).
-                    For zero momentum, however, the equivalence is not the case, strictly speaking.
-                    But it would be very exciting to get familiar with a deep learning case 
-                    such that SGD with a big batch size without momentum is more efficient then the SGD with a momentum.
+                </p>
+                <p>
+                    As we see in section
+                    <cite><a href="#Section-convergence-stability"> 3</a></cite>,
+                    for zero momentum 
+                    higher batch size can only corrupt the training process.
+                    For the momentum training
+                    \( \beta \gtrsim b \)
+                    the batch size change is undistinguishable from
+                    \( \beta \)
+                    shift as we see in section
+                    <cite><a href="#Section-Gradient-decent-with-momentum"> 4</a></cite>.
+                    Of course the gradient accumulation trick can provide a better result in practice
+                    but it looks excess.
                 </p>
             </section>
             <section id=Section-Conclusion>
