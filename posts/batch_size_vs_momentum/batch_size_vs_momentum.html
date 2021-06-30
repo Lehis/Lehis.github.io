@@ -217,8 +217,8 @@
                     without batch normalization.
                 </p>
                 <div class="wrap-collabsible">
-                    <input id="<label.Label object at 0x7f7189f58c10>" class="toggle" type="checkbox">
-                    <label for="<label.Label object at 0x7f7189f58c10>" class="lbl-toggle"> Model details </label>
+                    <input id="<label.Label object at 0x7f3cbc62c990>" class="toggle" type="checkbox">
+                    <label for="<label.Label object at 0x7f3cbc62c990>" class="lbl-toggle"> Model details </label>
                     <div class="collapsible-content"> <div class="content-inner">
                         <code id="python_code"><br>
                             model&#8194;=&#8194;tf.keras.Sequential([<br>
@@ -680,15 +680,17 @@
                     As we see in section
                     <cite><a href="#Section-convergence-stability"> 3</a></cite>,
                     for zero momentum 
-                    higher batch size can only corrupt the training process.
+                    higher batch size with fixed
+                    \( \lambda \)
+                    can only corrupt the training process.
                     For the momentum training
                     \( \beta \gtrsim b \)
                     the batch size change is undistinguishable from
                     \( \beta \)
-                    shift as we see in section
+                    shift as we saw in section
                     <cite><a href="#Section-Gradient-decent-with-momentum"> 4</a></cite>.
                     Of course the gradient accumulation trick can provide a better result in practice
-                    but it looks excess.
+                    but it looks redundant.
                 </p>
             </section>
             <section id=Section-Conclusion>
