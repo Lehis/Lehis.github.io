@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+
+<head>
+  <title>Learning Tracker</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous" type=""></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+          onload="renderMathInElement(document.body);"></script>
+  <link href="https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre|Roboto" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
+  <link href="../../css/normalize.css" rel="stylesheet" type="text/css" />
+  <link href="../../css/toc.css" rel="stylesheet" type="text/css" />
+  <link href="../../css/spoiler.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../../comments/inlineDisqussions.css" />
+
+</head>
+
+<body>
+
+<div id="bump">
+  <header class="site-header darken">
+    <div class="wrap">
+      <hgroup>
+        <h1> Alexey Tochin </h1>
+      </hgroup>
+      <a class="nav menu" href="#"><span class='icons'>☰</span></a>
+      <nav role="navigation">
+        <ul>
+          <li><a href="../../index.html"> Home </a></li>
+          <li><a href="../../machine_learning.html"> ML </a></li>
+          <li><a href="../../other_topics.html"> Not ML </a></li>
+          <li><a href="../../about.html"> About </a></li>
+          <li><a href="../../references.html"> References </a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<article class="article">
+  <article class="wrap post">
+    <header class="post-header">
+      <hgroup>
+        <h1>Batch size vs Momentum</h1>
+      </hgroup>
+    </header>
+    <p>
+      Suppose we found an optimal learning rate and other hyperparameters for a gradient descent method and for a certain model.
+      A typical next step is to train the model on a more power hardware with more GPU units and GPU RAM that supports bigger batch size.
+      How should we scale up the gradient descent hyperparameters and do not knock down the settings?
+      We address this question and
+      some familiar ones in this article.
+      The main thesis:
+      <em>batch size change is approximately equivalent to a certain shift of learning rate and momentum</em>.
+    </p>
+    <section id=Section-Notation>
+      <h2> Notation </h2>
+      <p>
+        Let
+        \( \boldsymbol\theta \in \mathbb{R}^D \)
+        be a trainable weight that is a vector in
+        a
+        \( D \)-dimensional
+        space of the model trainable weights.
+        We denote by
+        \( \{\boldsymbol\theta_n\}_{n = 0,1,2,3\dotso} \)
+        a sequence of the weight updates during the training process.
+      </p>
+    </section>
+    <section id=Section-Notation>
+      <h2> Notation </h2>
+      <p>
+        Let
+        \( \boldsymbol\theta \in \mathbb{R}^D \)
+        be a trainable weight that is a vector in
+        a
+        \( D \)-dimensional
+        space of the model trainable weights.
+        We denote by
+        \( \{\boldsymbol\theta_n\}_{n = 0,1,2,3\dotso} \)
+        a sequence of the weight updates during the training process.
+      </p>
+    </section>
+    <section id=Section-Notation>
+      <h2> Notation </h2>
+      <p>
+        Let
+        \( \boldsymbol\theta \in \mathbb{R}^D \)
+        be a trainable weight that is a vector in
+        a
+        \( D \)-dimensional
+        space of the model trainable weights.
+        We denote by
+        \( \{\boldsymbol\theta_n\}_{n = 0,1,2,3\dotso} \)
+        a sequence of the weight updates during the training process.
+      </p>
+    </section>
+  </article>
+</article>
+
+<script src="../../js/toc.js"></script>
+<script src="../../js/script.js"></script>
+
+<!-- jQuery-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+<script>
+  disqus_shortname = 'your_disqus_shortname';
+  jQuery(document).ready(function() {
+    jQuery("p").inlineDisqussions();
+  });
+</script>
+
+</body>
+</html>
