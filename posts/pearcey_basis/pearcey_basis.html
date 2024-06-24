@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Learning Tracker</title>
+    <title>Pearcey Basis</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous" type=""></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
@@ -67,8 +67,8 @@
             <nav role="navigation">
                 <ul>
                     <li><a href="../../index.html"> Home </a></li>
-                    <li><a href="../../machine_learning.html"> ML </a></li>
-                    <li><a href="../../other_topics.html"> Not ML </a></li>
+                    <li><a href="../../machine_learning.html"> Machine Learning </a></li>
+                    <li><a href="../../other_topics.html"> Other Topics </a></li>
                     <li><a href="../../about.html"> About </a></li>
                     <li><a href="../../references.html"> References </a></li>
                 </ul>
@@ -86,58 +86,65 @@
         </header>
         <section>
             <p class="abstract">
-                There is a known connection between orthogonal polynomials,
-                second order Sturm-Liouville differential equations,
-                random matrices, and orthogonal projectors in
+                There is a well-known connection between orthogonal polynomials,
+                second-order Sturm-Liouville differential equations, random matrices,
+                and orthogonal projectors in
                 \( L_2 \).
-                This post is about an extension of this topic.
-                We find a basis of
-                <em>the Pearcey Kernel</em>
-                introduced by
+                This post explores an extension of this topic.
+                We have identified a basis for the
+                <em>Pearcey Kernel</em>,
+                initially introduced by
                 <cite><a href="https://arxiv.org/abs/cond-mat/9804024">Brezin and Hikami</a></cite>.
-                To this end we have to break away from standard theory of second order differential equations
-                and orthogonal polynomials to third order equations and biorthogonal bases.
+                To achieve this,
+                we move beyond the traditional approach of second-order differential equations
+                and orthogonal polynomials,
+                employing third-order equations and biorthogonal bases instead.
             </p>
             <p>
-                For a reader how is not very familiar with this topic we have a
-                <cite><a href="#crash-introduction"> crash introduction</a></cite>
-                below. For others readers that are familiar with such things as
-                Circular Law for random matrices, Airy kernel, and determinantal point process
-                this section can be skipped without loss of understanding.
+                For readers who may not be familiar with this topic,
+                we have prepared a
+                <cite><a href="#crash-introduction">crash introduction</a></cite>
+                below.
+                If you're already comfortable with concepts like the
+                Circular Law for random matrices,
+                the Airy kernel,
+                and determinantal point processes,
+                you can skip this section without missing any crucial information.
             </p>
         </section>
         <section id="crash-introduction">
             <header class="post-header"><hgroup><h2>Crash Introduction</h2></hgroup></header>
             <section id="orthogonal-matrix-ensemble">
-            <h3>Orthogonal matrix ensemble</h3>
+                <h3>Orthogonal Matrix Ensemble</h3>
                 <p>
                     Let
                     \( H \)
                     be an
-                    \(N \times N\)
-                    real valued matrix. Define a probability measure for such matrices
-                    by the probability density function as follows
+                    \( N \times N \)
+                    real-valued matrix.
+                    We define a probability measure for such matrices
+                    using the following probability density function:
                 </p>
                 $$
                     \rho_N^{\mathrm{ort}}(H) := \mathcal{C}_N \, e^{-\frac12 \mathrm{Tr}\, H^2}.
                 $$
                 <p>
-                    Here and below
-                    \( \mathcal{C} \) is the normalization coefficient
-                    that depends on its indices only and may vary from one equation to another.
-                    This probabilistic model is known as
-                    <em> orthogonal matrix assemble</em>
-                    due to its invariance with respect to orthogonal matrix transform
+                    Here,
+                    \( \mathcal{C}_N \)
+                    is the normalization coefficient that depends solely on its indices
+                    and may vary from one equation to another.
+                    This probabilistic model is referred to as the
+                    <em>orthogonal matrix ensemble</em>
+                    because it remains invariant under the orthogonal matrix transformation
                     \( H \rightarrow O^{-1} H O \)
                     for any orthogonal matrix
                     \( O \).
                 </p>
                 <p>
-                    It is possible to show
-                    (see f.e.
+                    It is possible to show (see, for example,
                     <cite>
                         <a href="https://books.google.ru/books/about/Random_Matrices.html?id=Kp3Nx03_gMwC&redir_esc=y">
-                            Mehta, Random matrices,
+                            Mehta, Random Matrices,
                         </a>
                     </cite>
                     section 5.3)
@@ -145,7 +152,7 @@
                     \( \{\lambda_i\}_{0 \leq i < N} \)
                     of
                     \( H \)
-                    is given by the probability density function
+                    is given by the probability density function:
                 </p>
                 $$
                     \rho_N^{\mathrm{ort}}(\lambda_0, \lambda_1, \dotso \lambda_{N-1})
@@ -157,11 +164,12 @@
                     - \frac12 \sum_{0 \leq i < N} \lambda_i^2}.
                 $$
                 <p>
-                    This probabilistic model has a simple physical interpretation. The last
-                    expression above is a Boltzmann distribution for a 1-dimensional cold gas of
+                    This probabilistic model can be easily interpreted physically.
+                    The expression above represents a Boltzmann distribution
+                    for a one-dimensional gas containing
                     \( N \)
-                    particles placed in a fixed quadratic potential with
-                    repulsive logarithmic potential between each pair of the particles.
+                    particles, located in a stationary quadratic potential
+                    with a repulsive logarithmic potential between each pair of particles.
                 </p>
                 <figure>
                     <img src="images/eigenvalue_distribution_30.png">
@@ -170,21 +178,23 @@
                         \( \lambda \)
                         for
                         \( N = 30 \).
-                        Each of the 20 strings corresponds to a sample of 30 eigenvalues (particles) colored green.
-                        The blue line is the average eigenvalue density function.
+                        Each of the 20 strings corresponds to a random sample of the set of
+                        \( N \)
+                        eigenvalues (particles) colored green.
+                        The blue curve is the average eigenvalue density function.
                     </figcaption>
                 </figure>
             </section>
             <section id="determinantal-point-process">
-                <h3>Determinantal point process</h3>
+                <h3>Determinantal Point Process</h3>
                 <p>
-                    The random law form the previous subsection, in its turn, is a special case of so-called
-                    <em>determinantal point process</em>
-                    that is a random law on an unordered collection of
+                    The random law described in the previous subsection is an example of a
+                    <em>determinantal point process</em>.
+                    This is a type of random law on a collection of
                     \( N \)
-                    real numbers
+                    unordered real numbers
                     \( \{\lambda_i\}_{0 \leq i < N} \)
-                    of the form
+                    represented by the probability density function:
                 </p>
                 <div id="determinatal-point-process-rho">
                     $$
@@ -198,14 +208,16 @@
                 <p>
                     where
                     \( K(x,y) \)
-                    is some function of two arguments. This function
-                    can be understood as a kernel of a linear operator
-                    $$
-                        K: \psi(x) \mapsto (K \psi)(x) := \int dy~ K(x,y) \psi(y)
-                    $$
-                    acting on some linear space of functions
+                    is a real-valued function of two arguments.
+                    This function can be understood as the kernel of a linear operator that is
+                </p>
+                $$
+                    K: \psi(x) \mapsto (K \psi)(x) := \int dy~ K(x,y) \psi(y).
+                $$
+                <p>
+                    This operator acts on a linear space of functions represented by
                     \( \psi(x) \).
-                    We imply the projection property
+                    We assume the projection property:
                 </p>
                 <div id="projection-property">
                     $$
@@ -213,14 +225,16 @@
                         \quad (1.2.1)
                     $$
                 </div>
-                for
-                \( K(x,y) \)
-                below.
                 <p>
-                    It is straightforward to show that the correlation functions for
+                    for
+                    \( K(x,y) \).
+                </p>
+                <p>
+                    It can be shown that the correlation functions for any subset of particles
                     \( \lambda \)
-                    are of the same form as
-                    \( \rho_N \). Namely,
+                    have the same form as
+                    \( \rho_N \).
+                    Specifically:
                 </p>
                 <div id="determinatal-point-process-correlation">
                     $$
@@ -234,12 +248,14 @@
                     $$
                 </div>
                 <p>
-                    In particular, the first correlation function
-                    $$
-                        C_{N,1}(\lambda) = K(\lambda, \lambda)^{-1}
-                    $$
-                    is responsible to the mean density if the eigenvalues.
-                    The correlation between two eigenvalues is
+                    In particular, the first correlation function:
+                </p>
+                $$
+                    C_{N,1}(\lambda) = K(\lambda, \lambda)^{-1}
+                $$
+                <p>
+                    is responsible for the mean density of the eigenvalues.
+                    The correlation between two eigenvalues is:
                 </p>
                 <div id="two-point-cor">
                     $$
@@ -249,14 +265,14 @@
                     $$
                 </div>
                 <p>
-                    It can be shown
-                    (f.e. see
+                    It can be shown (see, for example,
                     <cite>
                         <a href="https://books.google.ru/books/about/Random_Matrices.html?id=Kp3Nx03_gMwC&redir_esc=y">
-                        Mehta <quote>Random matrice</quote>
+                            Mehta, Random Matrices
                         </a>
                     </cite>)
-                    that the random law from the previous subsection is a determinantal point process with the kernel
+                    that the random law from the previous subsection
+                    is a determinantal point process with the kernel:
                 </p>
                 <div id="kernel-decomposition">
                     $$
@@ -265,19 +281,21 @@
                     $$
                 </div>
                 <p>
-                    Here we introduced the Hermite functions
-                    \( \psi_i(x)\)
-                    $$
-                        \psi_i(x) := \frac{1}{(2 \pi)^{\frac14} n!^\frac12 } e^{\frac{x^2}{4}} \mathrm{He}_i(x), \quad
-                        i = 0, 1, 2, \dotso,
-                    $$
+                    Here, we introduced the Hermite functions
+                    \( \psi_i(x) \):
+                </p>
+                $$
+                    \psi_i(x) := \frac{1}{(2 \pi)^{\frac14} n!^\frac12 } e^{\frac{x^2}{4}} \mathrm{He}_i(x), \quad
+                    i = 0, 1, 2, \dotso,
+                $$
+                <p>
                     where
                     \( \mathrm{He}_i(x) \)
                     is the Hermite polynomial of order
                     \( i \).
                     The Hermite functions form an orthogonal basis in
                     \( L_2(\mathbb{R}) \),
-                    namely, the family is orthogonal
+                    namely, the family is orthogonal:
                 </p>
                 <div id="orthogonality">
                     $$
@@ -286,7 +304,7 @@
                     $$
                 </div>
                 <p>
-                    and complete
+                    and complete:
                 </p>
                 <div id="completeness">
                     $$
@@ -296,37 +314,42 @@
                 </div>
                 <div class="wrap-collabsible">
                     <input id="delta-function-remark" class="toggle" type="checkbox">
-                    <label for="delta-function-remark" class="lbl-toggle"> Remark about delta function </label>
+                    <label for="delta-function-remark" class="lbl-toggle">
+                        Remark about Dirac delta Function
+                    </label>
                     <div class="collapsible-content">
                         <div class="content-inner">
                             <p>
-                                To be mathematically rigorous we have to specify the meaning of the delta function.
-                                Here and below we chose the Schwartz linear space
-                                of smooth  function on
+                                To be mathematically rigorous,
+                                we have to specify the meaning of the delta function.
+                                Here and below,
+                                we choose the Schwartz linear space of smooth functions on
                                 \( \mathbb{R} \)
-                                decreasing faster then any polynomial
-                                equipped with the topology of local uniform convergence of all derivatives.
-                                Let the Dirac delta functional be the identity linear functional on this space.
+                                that decrease faster than any polynomial,
+                                equipped with the topology of local uniform convergence
+                                of all derivatives.
+                                Let the Dirac delta functional be the identity linear functional
+                                on this space.
                                 We drop the convolution with the test function
                                 \( f(x) \)
-                                from this space for shortness.
+                                from this space for brevity.
                             </p>
                         </div>
                     </div>
                 </div>
                 <p>
-                    Thereby, there is a relation between random law on the set of real numbers
-                    defined by kernel
+                    Thus, there is a relationship between the random law on the set of real numbers
+                    defined by the kernel
                     \( K_N(x,y) \)
                     and an orthogonal basis
                     \( \{\psi_i(x)\}_{i=0}^{+\infty} \).
                 </p>
                 <p>
-                    Notice that the Hermite functions
+                    Note that the Hermite functions
                     \( \psi_i \)
                     for
                     \( i = 0,1,2,\dotso \)
-                    are the only solutions to the second order differential equation
+                    are the only solutions to the second-order differential equation:
                 </p>
                 <div id="hermite-dif-equation">
                 $$
@@ -337,113 +360,134 @@
                 <p>
                     for
                     \( i \in \mathbb{R} \)
-                    that are square integrable on
+                    that are square-integrable on
                     \( \mathbb{R} \).
                 </p>
                 <p>
-                    Notice that if we consider Hermitian matrices
+                    If we consider Hermitian matrices
                     \( H \)
                     from the very beginning instead of real ones
-                    (<em>unitary ensemble</em>)
-                    the only thing to be changed in the random law for the eigenvalues
-                    is a rescaling factor
+                    (<em>unitary ensemble</em>),
+                    the only change in the random law for the eigenvalues is a rescaling factor
                     \( x \rightarrow 2^\frac12 x \).
                 </p>
                 <p>
-                    Let us summarize this subsection. We define a collection of random laws on the set of
+                    To summarize this subsection,
+                    we define a collection of random laws on the set of
                     \( N = 0, 1, 2, \dotso \)
-                    real numbers. This random law is related to some projection operator
+                    real numbers.
+                    This random law is related to a projection operator
                     \( K_N \)
                     that highlights an
-                    \( N \)-dimentional subspace
+                    \( N \)-dimensional subspace
                     \( V_N^\mathrm{ort} \subset L_2(\mathbb{R}) \).
-                    For this subspaces we have a natural orthogonal basis
+                    For these subspaces,
+                    we have a natural orthogonal basis
                     \( \{\psi_i\}_{i=0}^{+\infty} \)
-                    such that
-                    $$
-                        V_N^\mathrm{ort} = \mathrm{span} \{\psi_i\}_{i=0}^{N-1}, \quad N = 0, 1, 2, \dotso.
-                    $$
+                    such that:
                 </p>
+                $$
+                    V_N^\mathrm{ort} = \mathrm{span} \{\psi_i\}_{i=0}^{N-1}, \quad N = 0, 1, 2, \dotso.
+                $$
             </section>
             <section id="Scaling-limit">
-                <h3>Scaling limit</h3>
+                <h3>Scaling Limit</h3>
                 <p>
-                    In various fields such as statistical physics, we repeatedly consider a limit
-                    \( N \rightarrow +\infty \)
+                    In various fields,
+                    such as statistical physics, we frequently consider the limit as
+                    \( N \rightarrow +\infty \),
                     where
                     \( N \)
-                    can be a number of particles, dimensions, or another discrete parameter.
-                    The limiting model can demonstrate a spectacular behaviour that is a subject of interest.
-                    We examine a couple of examples below and then return back to the orthogonal assemble.
+                    could represent the number of particles, dimensions,
+                    or another discrete parameter.
+                    This limiting model can exhibit remarkable behavior,
+                    which is a subject of great interest.
+                    We will examine a few examples below and then return to the orthogonal ensemble.
                 </p>
                 <p>
-                    One of the simplest example is the central limit theorem that states that
-                    the sum of
+                    One of the simplest examples is the
+                    Central Limit Theorem.
+                    This theorem in particular states that the sum of
                     \( N \)
-                    independent identically distributed random variables
-                    \( \{X_i\}_{0 \leq i < N} \)
+                    independent, identically distributed random variables
+                    \( \{X_i\}_{0 \leq i < N} \),
                     divided by
-                    \( \sqrt{N} \)
-                    is closed to be of normally distributed with
-                    \( N \rightarrow +\infty\)
-                    provided the expectation of
+                    \( \sqrt{N} \),
+                    approaches the standard normal distribution as
+                    ( N \rightarrow +\infty \),
+                    provided that the expectation of
                     \( X_i \)
-                    is zero and variance equals to 1.
-                    $$
-                        \mathrm{law} \left[
-                            \frac{\sum_{0 \leq i < N} X_i}{\sqrt N}
-                        \right]
-                        \quad \xrightarrow{N \rightarrow ~\infty} \quad
-                        \mathcal{N}(0, 1).
-                    $$
-                    We drop some technical details and do not specify how such a limit should be defined.
+                    is
+                    \( 0 \)
+                    and the variance equals
+                    \( 1 \).
+                </p>
+                $$
+                    \mathrm{law}
+                    \left[
+                        \frac{\sum_{0 \leq i < N} X_i}{\sqrt N}
+                    \right]
+                    \quad \xrightarrow{N \rightarrow ~\infty} \quad
+                    \mathcal{N}(0, 1).
+                $$
+                <p>
+                    We omit some technical details
+                    and do not specify how such a limit should be defined.
                 </p>
                 <p>
-                    We can observe at least three important phenomena:
+                    At least three important phenomena can be observed:
                 </p>
                 <p>
-                    1. The limit random law exists with a certain rescaling, which is just the factor
-                    \( N^{-\frac12} \)
-                    in this case.
+                    1. The limit random law exists with a certain rescaling,
+                    which in this case is the factor
+                    \( N^{-\frac12} \).
                 </p>
                 <p>
-                    2. The limit law is universal. This means that no matter which law with variance 1 we have for
-                    \( X \)
-                    the limit law is still the normal law.
+                    2. The limit law is universal.
+                    This means that regardless of the initial law with
+                    mean
+                    \( 0 \)
+                    and variance
+                    \( 1 \)
+                    for \( X \), the limit law is still the normal law.
                 </p>
                 <p>
-                    3. The limit law has a symmetry property that is not the case for initial laws.
-                    For example, the normal random law is symmetric with respect to the mirror reflection
-                    \( x \rightarrow -x \)
-                    that may not be the case for the finite sum of
+                    3. The limit law has a symmetry property that the initial laws may not possess.
+                    For example, the normal random law is symmetric
+                    with respect to the mirror reflection
+                    \( x \rightarrow -x \),
+                    which may not be true for the finite sum of
                     \( X_i \).
                 </p>
                 <p>
                     Another well-known and classical example of the
                     <em>scaling limit</em>
                     is the
-                    <em>Ising Model</em>
-                    that is a probability model on a finite say square lattice of size
+                    <em>Ising Model</em>,
+                    a probability model on a finite,
+                    say square, lattice of size
                     \( N \times N \).
-                    It is remarkable that a properly defined limit random law
+                    Remarkably, a properly defined limit random law
                     \( N \rightarrow +\infty \)
-                    exists, does not depend of lattice type, is invariant with respect to conformal transforms,
-                    and has some new remarkable properties such as phase transition.
+                    exists, does not depend on the lattice type,
+                    is invariant with respect to angle-preserving spacial transforms,
+                    and exhibits new remarkable properties such as phase transition.
                 </p>
                 <p>
-                    The random matrix model defined in the previous section were not be that interesting to consider
-                    if we would not to make
+                    The random matrix model defined in the previous section
+                    would not be as interesting if we did not consider the limit as
                     \( N \)
-                    tends to infinity and do not study the behaviour of eigenvalues of an infinite random matrix!
+                    tends to infinity
+                    and study the behavior of eigenvalues of an ``infinite random matrix''.
                 </p>
             </section>
             <section id="sine-process">
-                <h3>Sine process</h3>
+                <h3>Sine Process</h3>
                 <p>
-                    We first note that if
+                    First, note that if
                     \( \{\psi_i(x)\}_{i=0}^{+\infty} \)
-                    is an orthonormal basis on
-                    \( L_2(\mathbb{R}) \)
+                    is an orthonormal basis in
+                    \( L_2(\mathbb{R}) \),
                     then
                     $$
                         \{A \cdot \psi_i(A x + B)\}_{i=0}^{+\infty}, \quad A \neq 0, \quad B \in \mathbb{R},
@@ -451,10 +495,10 @@
                     is also an orthonormal basis.
                 </p>
                 <p>
-                    In order to have a limit law for the orthogonal matrix assemble eigenvalues we can consider a limit
-                    for its kernel function
+                    To establish a limit law for the eigenvalues of the orthogonal matrix ensemble,
+                    we consider the limit of its kernel function
                     \( K(x,y) \)
-                    as follows
+                    as follows:
                 </p>
                 <div id="sine-limit">
                     $$
@@ -469,62 +513,73 @@
                     $$
                 </div>
                 <p>
-                    Here
+                    Here,
                     \( C_N \)
-                    is a normalization coefficient that is needed to have a finite limit, for example we can set
+                    is a normalization coefficient necessary to obtain a finite limit.
+                    For instance, we can set:
+                </p>
+                <p>
                     $$
                         C_N = \frac{1}{\pi K^{\mathrm{ort}}_N(0, 0)}.
                     $$
+                </p>
+                <p>
                     The limit
-                    \( K^{\mathrm{Sine}} \)
-                    is known as
-                    <em>Sine-kernel</em>
-                    that defines a random law on a infinite countable  set of real numbers with the correlation functions
+                    \( K^{\mathrm{Sine}} \),
+                    known as the
+                    <em>Sine-kernel</em>,
+                    defines a random law on an infinite countable set of real numbers
+                    with the correlation functions given in
                     <a href="#determinatal-point-process-correlation">(1.2.2)</a>.
                 </p>
                 <figure>
-                    <img src="images/sine-kernel-limit.gif">
+                    <img src="images/sine-kernel-limit.gif" alt="Sine-kernel limit illustration">
                     <figcaption>
-                        An illustration to
-                        <cite><a href="#sine-limit"> limit (1.4.1) </a></cite>
-                        for
-                        different values of
+                        An illustration of
+                        <cite><a href="#sine-limit">limit (1.4.1)</a></cite>
+                        for different values of
                         \( x - y \)
-                        and the restriction
+                        with the restriction
                         \( x + y = 0 \).
-                        The limit function coincides up to an additive constant with the two-point correlation function
-                        <cite><a href="#two-point-cor"> (1.2.3) </a></cite>.
-                        between to eigenvalues
+                        The limit function coincides up to an additive constant
+                        with the two-point correlation function
+                        <cite><a href="#two-point-cor">(1.2.3)</a></cite>
+                        between two eigenvalues
                         \( \lambda \)
                         as a function of their difference.
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="images/cor-1-limit.gif">
+                    <img src="images/cor-1-limit.gif" alt="Eigenvalue density illustration">
                     <figcaption>
-                        An illustration to
-                        <cite><a href="#sine-limit"> limit (1.4.1) </a></cite>
-                        for
-                        different values of
+                        An illustration of
+                        <cite><a href="#sine-limit">limit (1.4.1)</a></cite>
+                        for different values of
                         \( x + y \)
                         and
-                        \( x = y \). This function has an interpretation of an average density of the eigenvalues
+                        \( x = y \).
+                        This function represents the average density of the eigenvalues
                         \( \lambda \).
                     </figcaption>
                 </figure>
                 <p>
-                    Notice that sine random law is invariant with respect to translation
+                    Note that the sine random law is invariant with respect to translation
                     \( x \rightarrow x + c \)
-                    that is not the case for its finite
+                    for any real
+                    \( c \),
+                    which is not true for its finite
                     \( N \)
-                    analogous.
-                    The sine law has a physical interpretation of a repulsive logarithmic potential 1-dimensional gas
-                    consisting of infinite countable particles placed uniformly on unbounded real line
-                    with average particle density 1.
+                    analogs.
+                    The sine law has a physical interpretation
+                    as a one-dimensional gas of particles under a repulsive logarithmic potential,
+                    placed uniformly along the unbounded real line
+                    with an average particle density of
+                    \( 1 \).
                 </p>
                 <p>
-                    In order to understand better this limit we note that for any
-                    \( \omega > 0 \)
+                    To better understand this limit,
+                    consider that for any
+                    \( \omega > 0 \):
                 </p>
                 <div id="harmonic-limits">
                     $$
@@ -548,15 +603,18 @@
                     $$
                 </div>
                 <figure>
-                    <img src="images/cos-limit.gif">
+                    <img src="images/cos-limit.gif" alt="Cosine limit illustration">
                     <figcaption>
-                        Illustration for the \( cos \) limit above for \( \omega = 1 \).
+                        Illustration of the cosine limit above for
+                        \( \omega = 1 \).
                     </figcaption>
                 </figure>
                 <p>
-                    Decompose now the left and right had sides of the
-                    <cite><a href="#sine-limit"> limit (1.4.1) </a></cite>
+                    Now, decompose the left and right-hand sides of
+                    <cite><a href="#sine-limit">limit (1.4.1)</a></cite>
                     as follows:
+                </p>
+                <p>
                     $$
                         K^{\mathrm{ort}}_N(N^{-\frac12} x, N^{-\frac12} y)
                         = \sum_{0 \leq i < N}
@@ -574,28 +632,31 @@
                     $$
                 </div>
                 <p>
-                    We can observe that the even and odd Hermite functions tend to
+                    We observe that the even and odd Hermite functions tend towards
                     \( \cos \)
                     and
                     \( \sin \)
-                    functions correspondingly up to a normalization coefficients.
-                    On the other hand, the values
+                    functions, respectively, up to normalization coefficients.
+                    Furthermore, the values
                     \( \left\{ \sqrt{\frac{i}{N}} \right\}_{0 \leq i < N} \)
-                    fill the interval
+                    densely populate the interval
                     \( [0,1] \),
                     which is the range of
-                    \( \omega \) in
+                    \( \omega \)
+                    in
                     <cite><a href="#K^sin = int cos sin = sin cos">(1.4.1)</a></cite>,
-                    more and more densely with
-                    \( N \rightarrow +\infty \).
-                    Thereby, heuristically speaking, the discrete spectrum decompositon for the finite particle model
-                    tends to the continuous Fourier spectrum decomposition.
+                    as \( N \rightarrow +\infty \).
+                    Thus, heuristically,
+                    the discrete spectrum decomposition for the finite particle model
+                    approaches the continuous Fourier spectrum decomposition.
                 </p>
                 <p>
-                    We have to notice here that the Fourier basis is not a basis in sense of countable family of
-                    square integrable functions like the Hermite functions. In order to define it in a
-                    mathematically robust manner we have to work a lot and introduce
-                    <em> rigged Hilbert space</em>, see
+                    Note that the Fourier basis is not a basis
+                    in the sense of a countable family of square-integrable functions
+                    like the Hermite functions.
+                    To define it rigorously, we need to introduce the concept of a
+                    <em>rigged Hilbert space</em>,
+                    as detailed in
                     <cite>
                         <a href="https://books.google.ru/books/about/Generalized_Functions_Vol_4.html?id=LE4HjwEACAAJ&redir_esc=y">
                             Gelfand and Vilenkin: Generalized Functions
@@ -604,21 +665,27 @@
                     Volume 4.
                 </p>
                 <p>
-                    The last thing to mention here for this limit is the behaviour of the differential equation
+                    Finally, consider the behavior of the differential equation
                     <a href="#hermite-dif-equation">(1.2.7)</a>.
-                    After the substitution
-                    \( x \rightarrow N^{-\frac12} x \)
-                    we have the equation
+                    After substituting
+                    \( x \rightarrow N^{-\frac12} x \),
+                    we obtain:
+                </p>
+                <p>
                     $$
                         N \psi''\left( N^{-\frac12} x \right)
                         + \left( i + \frac12 - \frac{x^2}{4 N} \right) \psi\left( N^{-\frac12} x \right) = 0.
                     $$
-                    After division by
-                    \( N \)
-                    the last equation tends to the differential equation for
+                </p>
+                <p>
+                    Dividing by
+                    \( N \),
+                    this equation tends towards the differential equation for
                     \( \cos(\omega x) \)
                     and
-                    \( \sin(\omega x) \)
+                    \( \sin(\omega x) \):
+                </p>
+                <p>
                     $$
                         \psi''\left( x \right) + \omega^2 \psi\left( x \right) = 0
                     $$
@@ -628,7 +695,8 @@
                     \( N \rightarrow +\infty \).
                 </p>
                 <p>
-                    There by the scaling limit for sine process reveal itself in 4 aspects:
+                    Thus, the scaling limit for the sine process reveals itself
+                    in at least four aspects:
                 </p>
                 <p>
                     1. Limit of random laws on the set of points
@@ -641,9 +709,9 @@
                 <p>
                     3. Limit of subspaces in
                     \( L_2(\mathbb{R}) \)
-                    defined by projector operators
+                    defined by projection operators
                     \( K \).
-                    These subspaces can be defined with properly rescaled orthonormal basis
+                    These subspaces can be defined with a properly rescaled orthonormal basis
                     \( \{ \psi_i\}_{i=0}^{+\infty} \).
                 </p>
                 <p>
@@ -651,10 +719,10 @@
                 </p>
                 <p>
                     The sine limit is not the only possibility.
-                    For example, an analogous limit for the substitution
+                    For example, a similar limit for the substitution
                     \( x \rightarrow 2 N + N^{-\frac16} x \)
                     leads to the
-                    <em> Airy kernel </em>
+                    <em>Airy kernel</em>:
                 </p>
                 <div id="airy-kernel">
                     $$
@@ -666,19 +734,23 @@
                 <p>
                     where
                     \( \mathrm{Ai} \)
-                    is the Airy function that forms an orthogonal basis in sense
+                    is the Airy function, which forms an orthogonal basis in the sense that:
+                </p>
+                <p>
                     $$
                         \int_{-\infty}^{+\infty} d\lambda~ \mathrm{Ai}(\lambda + x) \mathrm{Ai}(\lambda + y)
                         = \delta(x-y).
                     $$
                 </p>
                 <p>
-                    Another
-                    <cite><a href="https://arxiv.org/abs/hep-th/9304063"> case </a></cite>
-                    is based on the Laguerre polynomials defined on half-axis
-                    \( (0, +\infty) \).
-                    It leads to the
-                    <em> Bessel kernel </em>
+                    Another example, as detailed in
+                    <cite><a href="https://arxiv.org/abs/hep-th/9304063">this paper</a></cite>,
+                    is based on the Laguerre polynomials defined on the half-axis
+                    \( (0, +\infty) \),
+                    leading to the
+                    <em>Bessel kernel</em>:
+                </p>
+                <p>
                     $$
                         K^{\mathrm{Bessel}}(x,y) :=
                         \frac{
@@ -688,46 +760,58 @@
                             2(x-y)
                         }, \quad x,y>0
                     $$
-                    Almost all such limits
-                    can be understood in terms of orthonormal bases, linear subspaces of
+                </p>
+                <p>
+                    Almost all such limits can be understood in terms of orthonormal bases,
+                    linear subspaces of
                     \(L_2\),
-                    and related well-studied second order differential equations.
-                    This structure, however, is violated by the model considered the in next section.
+                    and related well-studied second-order differential equations.
+                    However, this structure is violated by the model considered in the next section.
                 </p>
             </section>
         </section>
         <section id="pearcey-kernel">
             <header class="post-header"><hgroup><h2>Pearcey Kernel</h2></hgroup></header>
             <section id="biased-unitary-ensemble">
-                <h3>Biased unitary ensemble</h3>
+                <h3>Biased Unitary Ensemble</h3>
                 <p>
-                    <cite><a href="https://arxiv.org/abs/cond-mat/9804023"> Brezin and Hikami </a></cite>
-                    considered a random matrix model
-                    as follows.
-                    Let
+                    <cite>
+                        <a href="https://arxiv.org/abs/cond-mat/9804023">Brezin and Hikami</a>
+                    </cite>
+                    considered a unique random matrix model,
+                    known as the biased unitary ensemble.
+                    Here’s the setup: Let
                     \( H \)
                     be a
                     \( 2N \times 2N \)
-                    matrix and let
+                    Hermitian matrix. Additionally, let
                     \( H_a \)
                     be a fixed
-                    \(2N \times 2N\)
-                    matrix with only two distinct eigenvalues
+                    \( 2N \times 2N \)
+                    matrix with only two distinct eigenvalues,
                     \( a \)
                     and
                     \( -a \)
-                    (\( a > 0 \))
-                    both of multiplicity
+                    (with
+                    \( a > 0 \)),
+                    each having multiplicity
                     \( N \).
-                    Define now a random law on Hermitain matrices
-                    \( H \) by the probability density function
-                    $$
-                        \rho_N^a(H) := \left( Z_N^a \right)^{-1} e^{-\frac12 \mathrm{Tr} (H + H_a)^2}.
-                    $$
-                    is a fixed matrix.
-                    It was shown that the random law for the eigenvalues of
+                </p>
+                <p>
+                    The probability density function defining the random law
+                    on these Hermitian matrices
                     \( H \)
-                    is defined by a determinantal point process with the kernel
+                    is given by:
+                    $$
+                        \rho_N^a(H) := \left( Z_N^a \right)^{-1} e^{-\frac12 \mathrm{Tr} (H + H_a)^2},
+                    $$
+                    where
+                    \( Z_N^a \)
+                    is a normalization constant.
+                    This framework yields a determinantal point process
+                    governing the eigenvalues of
+                    \( H \),
+                    with the kernel:
                     $$
                         K^a_N(x,y) :=
                         \frac{-1}{(2\pi)^2 i}
@@ -736,9 +820,9 @@
                         \frac{1}{u-it}\,
                         e^{-\frac{t^2}{2}-\frac{u^2}{2} - i t x + u y}.
                     $$
-                    Here and below
+                    Here,
                     \( \oint_{\pm a} du \)
-                    is the Cauchy integral around the singular points
+                    denotes the Cauchy integral around the singular points
                     \( u = a \)
                     and
                     \( u = -a \)
@@ -753,57 +837,69 @@
                         \( N = 15 \)
                         and
                         \( a = 6 \).
-                        Each of the 20 strings corresponds to a sample consisting of
+                        Each of the
+                        \( 20 \)
+                        strings corresponds to a sample consisting of
                         \( 15 \times 2 = 30 \)
                         eigenvalues (particles) colored green.
-                        It can be observed that there is two slightly joined clusters on the real line.
+                        It can be observed that
+                        there are two slightly joined clusters on the real line.
                     </figcaption>
                 </figure>
                 <p>
-                    Notice that the kernel
+                    Notably,
+                    the kernel
                     \( K^a_N \)
-                    is not symmetric. Besides,
-                    the transform
+                    is not symmetric with respect to permutation of its arguments.
+                    Furthermore, transforming the kernel via:
                     $$
                         K(x,y) \rightarrow \frac{f(x)}{f(y)} K(x,y)
                     $$
-                    for any function $f$
-                    keeps the determinantal probability law unchanged.
-                    However, even with such a transform the kernel
+                    for any function
+                    \( f \)
+                    preserves the determinantal probability law.
+                    However, even with such a transformation,
+                    the kernel
                     \( K^a_N \)
                     cannot be symmetrized.
-                    It means, in particular, that
-                    the decomposition
-                    <cite><a href="#kernel-decomposition"> (1.2.4)</a></cite>
-                    into an orthogonal basis is also not possible.
-                    On the other hand, the projection property
-                    <cite><a href="#projection-property"> (1.2.1)</a></cite>
-                    is satisfied, which means that there must be a liner space of functions
-                    that are kept unchanged after the convolution with the integral operator
+                    This indicates that the decomposition into an orthogonal basis,
+                    as described in
+                    <cite><a href="#kernel-decomposition">(1.2.4)</a></cite>,
+                    is not feasible.
+                </p>
+                <p>
+                    Despite this,
+                    the projection property described in
+                    <cite><a href="#projection-property">(1.2.1)</a></cite>
+                    holds true.
+                    This means there exists a linear space of functions that
+                    remain unchanged when convolved with the integral operator
                     \( K^a_N \).
                 </p>
             </section>
             <section id="pearcey-scaling-limit">
-                <h3> Pearcey scaling limit</h3>
+                <h3>Pearcey Scaling Limit</h3>
                 <p>
                     For small values of
+                    \( a \),
+                    the random law approximates the form described in
+                    <a href="#orthogonal-matrix-ensemble">section 1</a>,
+                    where all eigenvalues form a single cluster.
+                    As
                     \( a \)
-                    the random law is closed to the assemble form
-                    <a href="#orthogonal-matrix-ensemble"> section 1</a>
-                    and all eigenvalues forms a unique cluster.
-                    The bigger value of
-                    \( a \)
-                    the two clusters of the eigenvalues are more separated form each other.
+                    increases, the two clusters of eigenvalues become more distinct.
                     Following
-                    <cite><a href="https://arxiv.org/abs/cond-mat/9804023"> Brezin and Hikami </a></cite>
-                    we consider now the limit
+                    <cite>
+                        <a href="https://arxiv.org/abs/cond-mat/9804023">Brezin and Hikami</a>
+                    </cite>,
+                    we consider the limit
                     \( a \rightarrow N^{\frac12} \)
                     and
                     \( x \rightarrow N^{-\frac14} x \),
                     for
                     \( N \rightarrow +\infty \).
-                    The geometrical meaning of this limit corresponds to the situation when two clusters
-                    of the eigenvalues are exactly on the edge between been separated and merged.
+                    This limit corresponds to the scenario where the two clusters of eigenvalues
+                    are exactly on the edge of being separated and merged.
                     The limit
                     $$
                         K^{\text{Pear}}(x,y) :=
@@ -813,8 +909,8 @@
                         \right)
                     $$
                     is known as the
-                    <em> Pearcey kernel</em>.
-                    It can be reformulated as follows
+                    <em>Pearcey kernel</em>.
+                    It can be reformulated as follows:
                 </p>
                 <div id="K-psi-phi">
                     $$
@@ -833,28 +929,38 @@
                         \omega:= e^{\frac{i \pi}{4}}.
                     $$
                 </p>
+                <p>
+                    The Pearcey kernel is notable for its asymmetry and
+                    the inclusion of second derivatives of the functions
+                    \( \phi \)
+                    and
+                    \( \psi \).
+                    This kernel describes the critical behavior of eigenvalues
+                    as they transition between forming a single cluster and two distinct clusters.
+                </p>
             </section>
             <section id="pearcey-basis">
                 <h3>Pearcey Basis</h3>
                 <p>
-                    In this section, we obtain the basis for the Pearcey Kernel
-                    that is the central problem of this article.
+                    In this section, we derive the basis for the Pearcey Kernel,
+                    which is the central problem of this article.
                 </p>
-                <h4> Finite \( N \) basis </h4>
+                <h4>Finite \( N \) Basis</h4>
                 <section id="finite-n-basis">
                     <p>
-                        Due to the asymmetric nature of the kernel, it is not possible at all to find an orthonormal basis.
-                        However, we still can work with a
-                        <cite><a href="https://arxiv.org/abs/math/9804027"> biorthoganal basis </a></cite>
-                        that is its relaxed version.
-                        To this end we consider two different collections
+                        Due to the asymmetric nature of the kernel,
+                        finding an orthonormal basis is impossible.
+                        However, we can still work with a
+                        <cite>
+                            <a href="https://arxiv.org/abs/math/9804027">biorthogonal basis</a>
+                        </cite>,
+                        which is a relaxed version of an orthonormal basis.
+                        To achieve this, we consider two different collections of functions on
+                        \( \mathbb{R} \):
                         \( \{e_{i}\}_{i=0}^{+\infty} \)
                         and
-                        \( \{e^\dag_{i}\}_{i=0}^{+\infty} \)
-                        of functions on
-                        \( \mathbb{R}\)
-                        instead of one
-                        and require
+                        \( \{e^\dag_{i}\}_{i=0}^{+\infty} \),
+                        instead of one, and require
                     </p>
                     <div id="biorthogonality">
                         $$
@@ -871,15 +977,17 @@
                         <cite><a href="#orthogonality">(1.2.5)</a></cite>
                         and
                         <cite><a href="#completeness">(1.2.6)</a></cite>.
-                        This approach is less restricted. In particular, after the transform
+                        This approach is less restrictive. Specifically, after the transformation
                         $$
-                            e^\dag_i(x),~e_i(x) \rightarrow f(x) \cdot e^\dag_i(x),~ \frac{e_i(x)}{f(x)}
+                            e^\dag_i(x),~e_i(x) \rightarrow f(x) \cdot e^\dag_i(x),~
+                            \frac{e_i(x)}{f(x)}
                         $$
-                        we also have an biorthogonal basis for any function
+                        we still have a biorthogonal basis for any function
                         \( f \)
-                        that is not zero at almost all points of
+                        that is non-zero at almost all points on
                         \( \mathbb{R} \).
-                        Remind that the only freedom for orthogonal real function basis is the choice of sing for each function.
+                        Recall that the only freedom for an orthogonal real function basis is
+                        the choice of sign for each function.
                     </p>
                     <p>
                         Our first step to obtain the Pearcey basis is to define the functions
@@ -891,8 +999,9 @@
                             \psi_n^a(x) := \frac{1}{\sqrt2\pi i} \oint_{\pm a} du~
                             \frac{e^{-\frac{u^2}{2} + u y}}{(a^2-u^2)^{n+1}},\quad n=0,1,2,3,\dotso.
                         $$
-                        They are eigenfunctions of the
-                        <em>third order </em> differential eigenvalue equations
+                        These functions are eigenfunctions of the
+                        <em>third order</em>
+                        differential eigenvalue equations
                         $$
                             (a^2-\partial_x^2) (\partial_x + x) \phi^a_n(x) = 2 n~ \partial_x \phi^a_n(x),\quad n=0,1,2,\dotso,
                         $$
@@ -900,8 +1009,7 @@
                         $$
                             (\partial_x - x) (a^2-\partial_x^2)  \psi^a_n(x) = 2 n~  \partial_x \psi^a_n(x), \quad n=0,1,2,\dotso
                         $$
-                        correspondingly.
-                        For example, for
+                        respectively. For example, for
                         \( n=0,1 \)
                         we have
                         $$
@@ -921,7 +1029,7 @@
                             {e^{\dagger}}_{2n+1}^a(x) := 2^{-\frac12} \psi_n^a(x),\quad n=0,1,2,3,\dotso.
                         $$
                         It is straightforward to check the
-                        <cite><a href="#biorthogonality"> biorthogonality (2.3.1) </a></cite>
+                        <cite><a href="#biorthogonality">biorthogonality (2.3.1)</a></cite>
                         as well as the decomposition
                         $$
                             K_N^a(x,y) =
@@ -936,7 +1044,9 @@
                     </p>
                     <div class="wrap-collabsible">
                         <input id="finite-pearcey-completness-proof" class="toggle" type="checkbox">
-                        <label for="finite-pearcey-completness-proof" class="lbl-toggle"> Details and proofs </label>
+                        <label for="finite-pearcey-completness-proof" class="lbl-toggle">
+                            Details and proofs
+                        </label>
                         <div class="collapsible-content">
                             <div class="content-inner">
                                 <p>
@@ -957,7 +1067,7 @@
                                         e^{-\frac{u^2}{2} + u x -\frac{t^2}{2}-i t x}
                                         = \dotso
                                     \end{aligned}\]
-                                    after the change  of variables
+                                    after the change of variables
                                     \( t\rightarrow t - i u \)
                                     we have
                                     \[\begin{aligned}
@@ -1069,8 +1179,10 @@
                             </div>
                         </div>
                     </div>
-                    </p>
                 </section>
+
+
+
                 <section id="pearcey-limit-basis">
                     <h4> Limit basis </h4>
                     <p>
@@ -1134,7 +1246,9 @@
                     </p>
                     <div class="wrap-collabsible">
                         <input id="pearcey-equation-limit" class="toggle" type="checkbox">
-                        <label for="pearcey-equation-limit" class="lbl-toggle"> Details and proofs </label>
+                        <label for="pearcey-equation-limit" class="lbl-toggle">
+                            Details and proofs
+                        </label>
                         <div class="collapsible-content">
                             <div class="content-inner">
                                 <p>
@@ -1185,16 +1299,18 @@
                         </div>
                     </div>
                     <p>
-                        We difine now a two-fold real continuous biorthogonal basis, namely, for each fixed
-                        \( \lambda \in \mathbb{R} \) we have two left basis functions
+                        We now define a two-fold real continuous biorthogonal basis.
+                        Specifically, for each fixed
+                        \( \lambda \in \mathbb{R} \),
+                        there are two left basis functions
                         \( e^\dag_\lambda \)
                         and two right basis functions
                         \( e_\lambda \).
-                        This is very similar to the real Fourier continuous orthogonal basis
-                        for which we have two real basis functions
-                        \( \{ \sin(\lambda x), \cos(\lambda x) \} \)
-                        for the same
-                        \( \lambda \in \mathbb{R} \).
+                        This is analogous to the real Fourier continuous orthogonal basis,
+                        where for each
+                        \( \lambda \in \mathbb{R} \),
+                        we have two real basis functions
+                        \( \{ \sin(\lambda x), \cos(\lambda x) \} \).
                     </p>
                     <p>
                         The pair of collections
@@ -1239,123 +1355,123 @@
                         where
                         \( \delta \)
                         is the Dirac delta function.
-                    </p>
-                    <div class="wrap-collabsible">
-                        <input id="pearcey-completness-proof" class="toggle" type="checkbox">
-                        <label for="pearcey-completness-proof" class="lbl-toggle"> Details and proofs </label>
-                        <div class="collapsible-content">
-                            <div class="content-inner">
-                                <p>
-                                    \[\begin{aligned}
-                                        &\int\limits_{-\infty}^{+\infty} dx\,
-                                        \psi_{\lambda}'(x) \phi_{\mu}(x)
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du
-                                        \int\limits_{-\infty}^{+\infty} dx\,
-                                        u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2} + u x
-                                        - \frac{t^4}{4} - \frac{\mu t^2}{2} - itx}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2}
-                                        - \frac{(t-iu )^4}{4} - \frac{\mu (t-iu)^2}{2} }
-                                        \int\limits_{-\infty}^{+\infty} dx\,
-                                        e^{-i t x}
-                                        =\\=&
-                                        \frac{1}{2\pi i}
-                                        \int\limits_{\mathcal{C}} du
-                                        \left.
-                                        u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2}
-                                        - \frac{(t-iu )^4}{4} - \frac{\mu (t-iu)^2}{2} }
-                                        \right|_{t=0}
-                                        =\\=&
-                                        \frac{1}{2\pi i}
-                                        \int\limits_{\mathcal{C}} du\,
-                                        u \,e^{  - \frac{\lambda u^2}{2}
-                                        + \frac{\mu u^2}{2} }
-                                        =\\=&
-                                        \frac{1}{2\pi i}
-                                        \int\limits_{\mathcal{C}} d\frac{u^2}{2}\,
-                                        e^{ - \frac{\lambda u^2}{2}
-                                        + \frac{\mu u^2}{2} }
-                                        =\\=&
-                                        \frac{-2}{2\pi }
-                                        \int\limits_{-\infty}^{\infty} d  t \,
-                                        e^{ - i \lambda t + i \mu t}
-                                        =\\=&
-                                        -2\,\delta(\lambda-\mu).
-                                    \end{aligned}\]
-                                    Other 3 statements can be show in the same manner.
-                                    The last identity can be proved as follows
-                                    \[\begin{aligned}
-                                        &\frac12 \int\limits_{-\infty}^{+\infty} d\lambda
-                                        \left(
-                                        \phi_{\lambda}{}'(x) \psi_{\lambda}(y)
-                                        - \phi_{\lambda}(x) \psi_{\lambda}{}'(y)
-                                        \right)
-                                        =\\=&
-                                        \int\limits_{-\infty}^{+\infty} d\lambda
-                                        \frac{1}{2(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        (-it-u)
-                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                        =\\=&
-                                        \frac{-1}{2(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \int\limits_{-\infty}^{+\infty} d\lambda
-                                        \frac{u^2+t^2}{u-it}
-                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                        =\\=&
-                                        -\frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \int\limits_{-\Lambda}^{+\infty} d\lambda
-                                        \frac{-\partial_{\lambda}}{u-it}
-                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                        =\\=&
-                                        \frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}}{u-it}
-                                        =\\=&
-                                        \frac{ \lim_{\Lambda \to +\infty} }{2\pi}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \left.
-                                        e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}
-                                        \right|_{u=it}
-                                        +\\+&
-                                        \frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}'} du\,
-                                        \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}}{u-it}.
-                                    \end{aligned}\]
-                                    The first term in the last expression is the result of the contour integration by
-                                    \( u \)
-                                    around
-                                    \( u = it \).
-                                    In the second integral, the contour
-                                    \( \mathcal{C}' \)
-                                    is the rest part of
-                                    \( \mathcal{C} \).
-                                    It tends to zero while
-                                    \( \Lambda \)
-                                    tends to infinity.
-                                    We continue the calculation by
-                                    $$
-                                        \dotso = \frac{ \lim_{\Lambda \to +\infty} }{2\pi}
-                                        \int\limits_{-\infty}^{+\infty} dt\,
-                                        e^{ - itx  + i t y + \frac{\Lambda}{2}\cdot 0} =
-                                        \delta(x-y).
-                                    $$
-                                </p>
+                        <div class="wrap-collabsible">
+                            <input id="pearcey-completness-proof" class="toggle" type="checkbox">
+                            <label for="pearcey-completness-proof" class="lbl-toggle"> Details and proofs </label>
+                            <div class="collapsible-content">
+                                <div class="content-inner">
+                                    <p>
+                                        \[\begin{aligned}
+                                            &\int\limits_{-\infty}^{+\infty} dx\,
+                                            \psi_{\lambda}'(x) \phi_{\mu}(x)
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du
+                                            \int\limits_{-\infty}^{+\infty} dx\,
+                                            u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2} + u x
+                                            - \frac{t^4}{4} - \frac{\mu t^2}{2} - itx}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2}
+                                            - \frac{(t-iu )^4}{4} - \frac{\mu (t-iu)^2}{2} }
+                                            \int\limits_{-\infty}^{+\infty} dx\,
+                                            e^{-i t x}
+                                            =\\=&
+                                            \frac{1}{2\pi i}
+                                            \int\limits_{\mathcal{C}} du
+                                            \left.
+                                            u \,e^{ \frac{u^4}{4} - \frac{\lambda u^2}{2}
+                                            - \frac{(t-iu )^4}{4} - \frac{\mu (t-iu)^2}{2} }
+                                            \right|_{t=0}
+                                            =\\=&
+                                            \frac{1}{2\pi i}
+                                            \int\limits_{\mathcal{C}} du\,
+                                            u \,e^{  - \frac{\lambda u^2}{2}
+                                            + \frac{\mu u^2}{2} }
+                                            =\\=&
+                                            \frac{1}{2\pi i}
+                                            \int\limits_{\mathcal{C}} d\frac{u^2}{2}\,
+                                            e^{ - \frac{\lambda u^2}{2}
+                                            + \frac{\mu u^2}{2} }
+                                            =\\=&
+                                            \frac{-2}{2\pi }
+                                            \int\limits_{-\infty}^{\infty} d  t \,
+                                            e^{ - i \lambda t + i \mu t}
+                                            =\\=&
+                                            -2\,\delta(\lambda-\mu).
+                                        \end{aligned}\]
+                                        Other 3 statements can be show in the same manner.
+                                        The last identity can be proved as follows
+                                        \[\begin{aligned}
+                                            &\frac12 \int\limits_{-\infty}^{+\infty} d\lambda
+                                            \left(
+                                            \phi_{\lambda}{}'(x) \psi_{\lambda}(y)
+                                            - \phi_{\lambda}(x) \psi_{\lambda}{}'(y)
+                                            \right)
+                                            =\\=&
+                                            \int\limits_{-\infty}^{+\infty} d\lambda
+                                            \frac{1}{2(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            (-it-u)
+                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                            =\\=&
+                                            \frac{-1}{2(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \int\limits_{-\infty}^{+\infty} d\lambda
+                                            \frac{u^2+t^2}{u-it}
+                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                            =\\=&
+                                            -\frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \int\limits_{-\Lambda}^{+\infty} d\lambda
+                                            \frac{-\partial_{\lambda}}{u-it}
+                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                            =\\=&
+                                            \frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}}{u-it}
+                                            =\\=&
+                                            \frac{ \lim_{\Lambda \to +\infty} }{2\pi}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \left.
+                                            e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}
+                                            \right|_{u=it}
+                                            +\\+&
+                                            \frac{ \lim_{\Lambda \to +\infty} }{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}'} du\,
+                                            \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y + \frac{\Lambda}{2} (t^2+u^2)}}{u-it}.
+                                        \end{aligned}\]
+                                        The first term in the last expression results from
+                                        the contour integration by
+                                        \( u \)
+                                        around
+                                        \( u = it \).
+                                        In the second integral, the contour
+                                        \( \mathcal{C}' \)
+                                        is the remaining part of
+                                        \( \mathcal{C} \).
+                                        It tends to zero as
+                                        \( \Lambda \)
+                                        approaches infinity. Continuing the calculation, we have
+                                        $$
+                                            \dotso = \frac{ \lim_{\Lambda \to +\infty} }{2\pi}
+                                            \int\limits_{-\infty}^{+\infty} dt\,
+                                            e^{ - itx  + i t y + \frac{\Lambda}{2}\cdot 0} =
+                                            \delta(x-y).
+                                        $$
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </p>
                     <p>
                         The Pearcey kernel can thus be decomposed as follows
                         $$
@@ -1366,88 +1482,91 @@
                             - \phi_{\lambda}(x) \psi_{\lambda}'(y)
                             \right).
                         $$
-                    </p>
-                    <div class="wrap-collabsible">
-                        <input id="pearcey-decomposition-proof" class="toggle" type="checkbox">
-                        <label for="pearcey-decomposition-proof" class="lbl-toggle"> Details and proofs </label>
-                        <div class="collapsible-content">
-                            <div class="content-inner">
-                                <p>
-                                    \[\begin{aligned}
-                                        &\frac12 \int\limits_{0}^{+\infty} d\lambda
-                                        \left(
-                                        \phi_{\lambda}(x) \psi_{\lambda}'(y)
-                                        - \phi_{\lambda}(x)' \psi_{\lambda}(y)
-                                        \right)
-                                        =\\=&
-                                        \int\limits_{0}^{+\infty} d\lambda
-                                        \frac{1}{2(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        (u+it)
-                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \int\limits_{0}^{+\infty} d\lambda
-                                        \frac{u^2+t^2}{u-it}
-                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \int\limits_{0}^{+\infty} d\lambda
-                                        \frac{-\partial_{\lambda}}{u-it}
-                                        e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y }}{u-it}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \frac{e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
-                                        (i\partial_t-\partial_u)
-                                        e^{ - itx +  u y}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        e^{ - itx +  u y}
-                                        (i\partial_t-\partial_u)
-                                        \frac{e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        e^{ - itx +  u y}
-                                        \frac{ (-i t^3 - u^3 ) e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \frac{ ( t^2 - itu - u^2 ) e^{-\frac{t^4}{4} + \frac{u^4}{4}  - itx +  u y } }{x-y}
-                                        =\\=&
-                                        \frac{1}{(2\pi)^2 i}
-                                        \int\limits_{-\infty}^{+\infty} dt
-                                        \int\limits_{\mathcal{C}} du\,
-                                        \frac{ ( -\partial_x^2 + \partial_x \partial_y - \partial_y ^2 ) e^{-\frac{t^4}{4} + \frac{u^4}{4}  - itx +  u y } }{x-y}
-                                        =\\=&
-                                        \frac{\phi'(x)\psi'(y)-\phi''(x)\psi(y)-\phi(x)\psi''(y) }{x-y}
-                                        =K(x,y).
-                                    \end{aligned}\]
-                                </p>
+                        <div class="wrap-collabsible">
+                            <input id="pearcey-decomposition-proof" class="toggle" type="checkbox">
+                            <label for="pearcey-decomposition-proof" class="lbl-toggle"> Details and proofs </label>
+                            <div class="collapsible-content">
+                                <div class="content-inner">
+                                    <p>
+                                        \[\begin{aligned}
+                                            &\frac12 \int\limits_{0}^{+\infty} d\lambda
+                                            \left(
+                                            \phi_{\lambda}(x) \psi_{\lambda}'(y)
+                                            - \phi_{\lambda}(x)' \psi_{\lambda}(y)
+                                            \right)
+                                            =\\=&
+                                            \int\limits_{0}^{+\infty} d\lambda
+                                            \frac{1}{2(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            (u+it)
+                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \int\limits_{0}^{+\infty} d\lambda
+                                            \frac{u^2+t^2}{u-it}
+                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \int\limits_{0}^{+\infty} d\lambda
+                                            \frac{-\partial_{\lambda}}{u-it}
+                                            e^{-\frac{t^4}{4} - \frac{\lambda t^2}{2} - itx + \frac{u^4}{4} - \frac{\lambda u^2}{2} + u y}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \frac{e^{-\frac{t^4}{4} - itx + \frac{u^4}{4} + u y }}{u-it}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \frac{e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
+                                            (i\partial_t-\partial_u)
+                                            e^{ - itx +  u y}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            e^{ - itx +  u y}
+                                            (i\partial_t-\partial_u)
+                                            \frac{e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            e^{ - itx +  u y}
+                                            \frac{ (-i t^3 - u^3 ) e^{-\frac{t^4}{4} + \frac{u^4}{4} }}{(u-it)(x-y)}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \frac{ ( t^2 - itu - u^2 ) e^{-\frac{t^4}{4} + \frac{u^4}{4}  - itx +  u y } }{x-y}
+                                            =\\=&
+                                            \frac{1}{(2\pi)^2 i}
+                                            \int\limits_{-\infty}^{+\infty} dt
+                                            \int\limits_{\mathcal{C}} du\,
+                                            \frac{ ( -\partial_x^2 + \partial_x \partial_y - \partial_y ^2 ) e^{-\frac{t^4}{4} + \frac{u^4}{4}  - itx +  u y } }{x-y}
+                                            =\\=&
+                                            \frac{\phi'(x)\psi'(y)-\phi''(x)\psi(y)-\phi(x)\psi''(y) }{x-y}
+                                            =K(x,y).
+                                        \end{aligned}\]
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </p>
                     <p>
                         This is similar to the
-                        <cite><a href="#airy-kernel"> Airy kernel decomposition (1.4.3)</a></cite>,
-                        where the kernel is a projector onto the positive half of the spectrum.
-                    </p>
+                        <cite>
+                            <a href="#airy-kernel">
+                                Airy kernel decomposition (1.4.3)
+                            </a>
+                        </cite>,
+                        where the kernel projects onto the positive half of the spectrum.                    </p>
                 </section>
             </section>
         </section>
@@ -1455,7 +1574,9 @@
         <h2> Conclusion </h2>
         <p>
             The author is grateful to
-            <cite><a href="http://www.mathnet.ru/eng/person9066"> Alexander Bufetov </a></cite>
+            <cite>
+                <a href="http://www.mathnet.ru/eng/person9066"> Alexander Bufetov </a>
+            </cite>
             for setting this problem and for valuable discussions.
             The basis was found in Spring 2016 and published first here.
         </p>

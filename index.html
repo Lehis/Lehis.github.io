@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Learning Tracker</title>
+    <title>Alexey Tochin Blog</title>
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous" type=""></script>
@@ -25,8 +25,8 @@
             <nav role="navigation">
                 <ul>
                     <li><a href="index.html"> Home </a></li>
-                    <li><a href="machine_learning.html"> ML </a></li>
-                    <li><a href="other_topics.html"> Not ML </a></li>
+                    <li><a href="machine_learning.html"> Machine Learning </a></li>
+                    <li><a href="other_topics.html"> Other Topics </a></li>
                     <li><a href="about.html"> About </a></li>
                     <li><a href="references.html"> References </a></li>
                 </ul>
@@ -40,58 +40,87 @@
         <header class="post-header"><hgroup><h1> All articles </h1></hgroup></header>
         <ol class="post-list">
             <hr>
-            <li class="slider">
-                <img src="posts/pearcey_basis/images/eigenvalue_distribution_15_6.png" alt="" height="200" width="200" class=hp />
-                <div class="deets left-slide">
-                    <h1>
-                        <a href="posts/pearcey_basis/pearcey_basis.html">
-                            Pearcey Kernel Basis: <br>
-                            Beyond Second Order Differential Equations
-                        </a>
-                    </h1>
-                    <p></p>
-                    <p class="abstract">
-                        There is a known connection between orthogonal polynomials,
-                        second order Sturm-Liouville differential equations,
-                        random matrices, and orthogonal projectors in
-                        \( L_2 \).
-                        This post is about an extension of this topic.
-                        We find a basis of
-                        <em>the Pearcey Kernel</em>
-                        introduced by
-                        <cite><a href="https://arxiv.org/abs/cond-mat/9804024">Brezin and Hikami</a></cite>.
-                        To this end we have to break away from standard theory of second order differential equations
-                        and orthogonal polynomials to third order equations and biorthogonal bases.
-                    </p>
-                    <p class="date">
-                        published 8.04.2021, last update 8.04.2021
-                    </p>
-                </div>
-            </li>
+                <li class="slider">
+                    <img
+                            src="posts/pearcey_basis/images/eigenvalue_distribution_15_6.png"
+                            alt=""
+                            height="200"
+                            width="200"
+                            class=hp
+                    />
+                    <div class="deets left-slide">
+                        <h1>
+                            <a href="posts/pearcey_basis/pearcey_basis.html">
+                                Pearcey Kernel Basis: <br>
+                                Beyond Second Order Differential Equations
+                            </a>
+                        </h1>
+                        <p></p>
+                        <p class="summary">
+                            There is a well-known connection between orthogonal polynomials,
+                            second-order Sturm-Liouville differential equations, random matrices,
+                            and orthogonal projectors in
+                            \( L_2 \).
+                            This post explores an extension of this topic.
+                            We have identified a basis for the
+                            <em>Pearcey Kernel</em>,
+                            initially introduced by
+                            <cite>
+                                <a href="https://arxiv.org/abs/cond-mat/9804024">
+                                    Brezin and Hikami
+                                </a>
+                            </cite>.
+                            To achieve this,
+                            we move beyond the traditional approach
+                            of second-order differential equations
+                            and orthogonal polynomials,
+                            employing third-order equations and biorthogonal bases instead.
+                        </p>
+                        <p class="date">
+                            published 8.04.2021, last update 24.06.2024
+                        </p>
+                    </div>
+                </li>
             <hr>
-            <li class="slider">
-                <img src="posts/batch_size_vs_momentum/images/icon.png" alt="" height="200" width="200" class=hp />
-                <div class="deets left-slide">
-                    <h1>
-                        <a href="posts/batch_size_vs_momentum/batch_size_vs_momentum.html">
-                            Batch size vs Momentum
-                        </a>
-                    </h1>
-                    <p></p>
-                    <p class="abstract">
-                        Suppose we found an optimal learning rate and other hyperparameters for a gradient descent method and for a certain model.
-                        A typical next step is to train the model on a more power hardware with more GPU units and GPU RAM that supports bigger batch size.
-                        How should we scale up the gradient descent hyperparameters and do not knock down the settings?
-                        We address this question and
-                        some familiar ones in this article.
-                        The main thesis:
-                        <em>batch size change is approximately equivalent to a certain shift of learning rate and momentum</em>.
-                    </p>
-                    <p class="date">
-                        published 8.04.2021, last update 30.07.2021
-                    </p>
-                </div>
-            </li>
+                <li class="slider">
+                    <img
+                            src="posts/batch_size_vs_momentum/images/icon.png"
+                            alt=""
+                            height="200"
+                            width="200"
+                            class=hp
+                    />
+                    <div class="deets left-slide">
+                        <h1>
+                            <a href="posts/batch_size_vs_momentum/batch_size_vs_momentum.html">
+                                Batch size vs Momentum
+                            </a>
+                        </h1>
+                        <p></p>
+                        <p class="summary">
+                            Imagine we've pinpointed the optimal learning rate
+                            and other hyperparameters
+                            for a gradient descent method and a specific model.
+                            The natural progression is
+                            to train this model on more powerful hardware,
+                            equipped with additional GPU units and RAM, enabling larger batch sizes.
+                            But how do we adjust the gradient descent hyperparameters
+                            to scale up effectively without disrupting the current settings?
+                        </p>
+                        <p class="summary">
+                            In this article,
+                            we explore this question along with some related ones.
+                            Our main thesis:
+                            <em>
+                                changing the batch size is roughly equivalent to adjusting
+                                the learning rate and momentum.
+                            </em>
+                        </p>
+                        <p class="date">
+                            published 8.04.2021, last update 24.06.2024
+                        </p>
+                    </div>
+                </li>
             <hr>
         </ol>
     </article>
